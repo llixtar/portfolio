@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050505;
+  --foreground: #ededed;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  /* Реєструємо класи, які будуть дивитися на CSS-змінні з layout.tsx */
+  --font-heading: var(--font-jura);
+  --font-sans: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes glint {
+  0% {
+    transform: translateX(-150%) skewX(-25deg);
+  }
+  25%, 100% {
+    transform: translateX(450%) skewX(-25deg);
+  }
+}
+
+.animate-glint {
+  animation: glint 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes text-wave {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-text-wave {
+  background: linear-gradient(
+    90deg,
+    #888888 0%,
+    #b5b5b5 35%,
+    #ffffff 50%,
+    #b5b5b5 65%,
+    #888888 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-wave 3.5s ease-in-out infinite;
+}
+
+/* 3D Coin Flip Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Floating / Levitation Effect for 3D Hero Button */
+@keyframes float-levitate {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes float-shadow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(0.82);
+    opacity: 0.3;
+  }
+}
+
+.animate-float {
+  animation: float-levitate 3.6s ease-in-out infinite;
+}
+
+.animate-float-shadow {
+  animation: float-shadow 3.6s ease-in-out infinite;
+}
+
