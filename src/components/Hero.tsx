@@ -165,83 +165,89 @@ export default function Hero() {
           </h1>
         </div>
 
-        {/* 3. НИЖНІЙ БЛОК: ЧИСТІ ПЕРЕВАГИ (ЛАКОНІЧНИЙ СПИСОК) + 3D СВІТЛО-СРІБНА КНОПКА */}
-        <div className="w-full flex flex-col items-center space-y-7 sm:space-y-8 md:space-y-8 pb-2 sm:pb-3">
-          {/* ЛАКОНІЧНІ ТЕЗИ (БЕЗ ЗАЙВОГО ТЕКСТУ, ЧІТКИЙ ФОКУС) */}
-          <div className="w-full max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-x-10 sm:gap-y-3.5 text-left">
+        {/* 3. НИЖНІЙ БЛОК: ПЕРЕВАГИ + ОБ'ЄМНА 3D СВІТЛО-СРІБНА КНОПКА */}
+        <div className="w-full flex flex-col items-center space-y-8 sm:space-y-9 md:space-y-9 pb-2 sm:pb-3">
+          {/* ОПИС: на комп'ютері повні розгорнуті рядки, на мобілці сфокусовані жирні тези */}
+          <div className="w-full flex flex-col items-start text-left max-w-4xl mx-auto">
+            <div className="w-full space-y-3 sm:space-y-3 md:space-y-3.5">
               {/* 1. Mobile First */}
-              <div className="flex items-center gap-2.5 sm:gap-3">
-                <Smartphone className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
-                <span className="text-sm sm:text-[15px] text-white font-medium">
-                  Мобільна версія в пріоритеті
-                </span>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Smartphone className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Мобільна версія в пріоритеті</strong>
+                  <span className="hidden md:inline">: ідеальна зручність для покупців зі смартфонів.</span>
+                </p>
               </div>
 
               {/* 2. Жива демка онлайн */}
-              <div className="flex items-center gap-2.5 sm:gap-3">
-                <Eye className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
-                <span className="text-sm sm:text-[15px] text-white font-medium">
-                  Живе демо під час роботи
-                </span>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Eye className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Живе демо під час роботи</strong>
+                  <span className="hidden md:inline">: бачите проєкт онлайн на кожному етапі та коригуєте в процесі.</span>
+                </p>
               </div>
 
               {/* 3. Без шаблонів */}
-              <div className="flex items-center gap-2.5 sm:gap-3">
-                <Code2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
-                <span className="text-sm sm:text-[15px] text-white font-medium">
-                  Жодних шаблонів
-                </span>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Code2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Жодних шаблонів</strong>
+                  <span className="hidden md:inline">: індивідуальна розробка та чистий швидкий код під вашу справу.</span>
+                </p>
               </div>
 
               {/* 4. Адмінка та кабінети */}
-              <div className="flex items-center gap-2.5 sm:gap-3">
-                <Sliders className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
-                <span className="text-sm sm:text-[15px] text-white font-medium">
-                  Адмін-панелі та кабінети
-                </span>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Sliders className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Адмін-панелі та кабінети</strong>
+                  <span className="hidden md:inline">: повне керування меню, цінами, доставкою та клієнтами.</span>
+                </p>
               </div>
 
               {/* 5. Telegram-бот бонусом */}
-              <div className="flex items-center gap-2.5 sm:gap-3">
-                <Send className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
-                <span className="text-sm sm:text-[15px] text-white font-medium">
-                  Telegram-бот бонусом
-                </span>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Send className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Telegram-бот бонусом</strong>
+                  <span className="hidden md:inline">: налаштованого бота для миттєвих сповіщень про замовлення дарую в подарунок.</span>
+                </p>
               </div>
 
               {/* 6. Оплата в кінці */}
-              <div className="flex items-center gap-2.5 sm:gap-3">
-                <Banknote className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
-                <span className="text-sm sm:text-[15px] text-white font-medium">
-                  Оплата в кінці
-                </span>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Banknote className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Оплата в кінці</strong>
+                  <span className="hidden md:inline">: розрахунок тільки після того, як ви особисто затвердите готову демку.</span>
+                </p>
               </div>
             </div>
           </div>
 
-          {/* 3D СВІТЛО-СРІБНА КНОПКА З ТЕМНИМ ТЕКСТОМ ТА БОРДЕРОМ (ЛЕВІТАЦІЯ) */}
-          <div className="w-full flex flex-col items-center justify-center pt-2 sm:pt-2 pb-2">
+          {/* МАКСИМАЛЬНО ОБ'ЄМНА 3D СВІТЛО-СРІБНА КНОПКА З ВЕЛИКИМ ШРИФТОМ (ЛЕВІТАЦІЯ) */}
+          <div className="w-full flex flex-col items-center justify-center pt-2 sm:pt-3 pb-2">
             <div className="relative group inline-flex items-center justify-center">
-              {/* Нижня реалістична тінь левітації */}
+              {/* Реалістичні тіні левітації */}
               <div
-                className="absolute -bottom-2 w-[85%] h-4 rounded-[50%] bg-black/90 blur-md pointer-events-none animate-float-shadow transition-all duration-300 group-hover:scale-110 group-hover:opacity-90"
+                className="absolute -bottom-2 w-[88%] h-5 rounded-[50%] bg-black/95 blur-md pointer-events-none animate-float-shadow transition-all duration-300 group-hover:scale-110 group-hover:opacity-90"
                 aria-hidden="true"
               />
               <div
-                className="absolute -bottom-3.5 w-[95%] h-6 rounded-[50%] bg-black/70 blur-xl pointer-events-none animate-float-shadow"
+                className="absolute -bottom-4 w-[96%] h-7 rounded-[50%] bg-black/75 blur-xl pointer-events-none animate-float-shadow"
                 aria-hidden="true"
               />
 
               <a
                 href="#projects"
-                className="relative inline-flex p-[1.5px] pb-[4px] bg-gradient-to-b from-neutral-800 via-neutral-900 to-black hover:from-neutral-700 hover:to-neutral-900 [clip-path:polygon(12px_0,calc(100%-12px)_0,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0_calc(100%-12px),0_12px)] transition-all duration-300 hover:drop-shadow-[0_8px_24px_rgba(255,255,255,0.2)] cursor-pointer select-none active:translate-y-[2px] animate-float drop-shadow-[0_12px_22px_rgba(0,0,0,0.85)]"
+                className="relative inline-flex p-[2px] pb-[5px] sm:pb-[6px] bg-gradient-to-b from-[#e5e7eb] via-[#6b7280] to-[#1f2937] hover:from-white hover:via-[#9ca3af] hover:to-[#374151] [clip-path:polygon(14px_0,calc(100%-14px)_0,100%_14px,100%_calc(100%-14px),calc(100%-14px)_100%,14px_100%,0_calc(100%-14px),0_14px)] transition-all duration-300 hover:drop-shadow-[0_10px_28px_rgba(255,255,255,0.28)] cursor-pointer select-none active:translate-y-[3px] active:pb-[2px] animate-float drop-shadow-[0_8px_0_#111318,0_16px_32px_rgba(0,0,0,0.95)]"
               >
-                {/* Внутрішня 3D-грань кнопки: світло-срібна інверсія */}
-                <div className="relative w-full h-full px-9 py-3.5 sm:px-12 sm:py-4 bg-gradient-to-b from-[#ffffff] via-[#e5e7eb] to-[#c7cbd1] group-hover:from-[#ffffff] group-hover:via-[#edf0f3] group-hover:to-[#d2d6dc] [clip-path:polygon(11px_0,calc(100%-11px)_0,100%_11px,100%_calc(100%-11px),calc(100%-11px)_100%,11px_100%,0_calc(100%-11px),0_11px)] flex items-center justify-center overflow-hidden shadow-[inset_0_1.5px_0_rgba(255,255,255,0.9),inset_0_-2px_0_rgba(0,0,0,0.2)] transition-colors duration-300">
+                {/* Внутрішня лицьова 3D-грань кнопки (масивне світле срібло з фаскою) */}
+                <div className="relative w-full h-full px-10 py-4 sm:px-14 sm:py-4.5 md:px-16 md:py-5 bg-gradient-to-b from-[#ffffff] via-[#e5e7eb] to-[#c7cbd2] group-hover:from-[#ffffff] group-hover:via-[#edf0f4] group-hover:to-[#d2d6dd] [clip-path:polygon(12px_0,calc(100%-12px)_0,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0_calc(100%-12px),0_12px)] flex items-center justify-center overflow-hidden shadow-[inset_0_2.5px_0_rgba(255,255,255,1),inset_0_-3px_0_rgba(156,163,175,0.7),inset_0_0_14px_rgba(255,255,255,0.6)] transition-all duration-300">
 
-                  {/* Темний текст із насиченим контуром */}
-                  <span className="font-mono text-xs sm:text-sm tracking-[0.22em] uppercase font-bold text-neutral-950 animate-text-wave-dark select-none">
+                  {/* Збільшений, чіткий темний шрифт */}
+                  <span className="font-mono text-sm sm:text-base md:text-[17px] tracking-[0.24em] uppercase font-black text-neutral-950 animate-text-wave-dark select-none drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
                     ПЕРЕГЛЯНУТИ РОБОТИ
                   </span>
                 </div>

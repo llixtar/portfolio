@@ -606,8 +606,8 @@ export default function Projects() {
               <InteractiveSwapShowcase project={flagship} />
             </div>
 
-            {/* Кнопка розгортання / згортання опису */}
-            <div className="flex flex-col items-center pt-2">
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ) */}
+            <div className="flex flex-col items-center pt-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => toggleProject("flagship-project")}
@@ -627,9 +627,12 @@ export default function Projects() {
               </button>
             </div>
 
-            {/* Б) ДЕТАЛЬНИЙ ОПИС ПРОЄКТУ ТА АРХІТЕКТУРА СИСТЕМИ (ЗГОРНУТИЙ ЗА ЗАМОВЧУВАННЯМ) */}
-            {expandedProjects["flagship-project"] && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ПРОЄКТУ: на ПК видно завжди (lg:grid), на мобілці розгортається */}
+            <div
+              className={`${
+                expandedProjects["flagship-project"] ? "grid" : "hidden"
+              } lg:grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900`}
+            >
               
               {/* Ліва колонка: Плашка та опис */}
               <div className="lg:col-span-5 space-y-4">
@@ -723,7 +726,6 @@ export default function Projects() {
               </div>
 
             </div>
-            )}
 
           </div>
         )}
@@ -743,8 +745,8 @@ export default function Projects() {
               <InteractiveSwapShowcase project={lepoxy} phonePosition="top-left" />
             </div>
 
-            {/* Кнопка розгортання / згортання опису */}
-            <div className="flex flex-col items-center pt-2">
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ) */}
+            <div className="flex flex-col items-center pt-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => toggleProject("lepoxy-project")}
@@ -764,9 +766,12 @@ export default function Projects() {
               </button>
             </div>
 
-            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ (ЗГОРНУТИЙ ЗА ЗАМОВЧУВАННЯМ) */}
-            {expandedProjects["lepoxy-project"] && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ: на ПК видно завжди, на мобілці розгортається */}
+            <div
+              className={`${
+                expandedProjects["lepoxy-project"] ? "grid" : "hidden"
+              } lg:grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900`}
+            >
               
               {/* Ліва колонка: Плашка та опис */}
               <div className="lg:col-span-5 space-y-4">
@@ -858,7 +863,6 @@ export default function Projects() {
               </div>
 
             </div>
-            )}
 
           </div>
         )}
@@ -878,8 +882,8 @@ export default function Projects() {
               <InteractiveSwapShowcase project={tanya} phonePosition="bottom-left" />
             </div>
 
-            {/* Кнопка розгортання / згортання опису */}
-            <div className="flex flex-col items-center pt-2">
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ) */}
+            <div className="flex flex-col items-center pt-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => toggleProject("tanya-zaiets")}
@@ -899,9 +903,12 @@ export default function Projects() {
               </button>
             </div>
 
-            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ (ЗГОРНУТИЙ ЗА ЗАМОВЧУВАННЯМ) */}
-            {expandedProjects["tanya-zaiets"] && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ: на ПК видно завжди, на мобілці розгортається */}
+            <div
+              className={`${
+                expandedProjects["tanya-zaiets"] ? "grid" : "hidden"
+              } lg:grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900`}
+            >
               
               {/* Ліва колонка: Плашка та опис */}
               <div className="lg:col-span-5 space-y-4">
@@ -993,7 +1000,6 @@ export default function Projects() {
               </div>
 
             </div>
-            )}
 
           </div>
         )}
@@ -1013,8 +1019,8 @@ export default function Projects() {
               <InteractiveSwapShowcase project={thiamis} phonePosition="top-right" />
             </div>
 
-            {/* Кнопка розгортання / згортання опису */}
-            <div className="flex flex-col items-center pt-2">
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ) */}
+            <div className="flex flex-col items-center pt-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => toggleProject("thiamis-cleaning")}
@@ -1034,9 +1040,12 @@ export default function Projects() {
               </button>
             </div>
 
-            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ (ЗГОРНУТИЙ ЗА ЗАМОВЧУВАННЯМ) */}
-            {expandedProjects["thiamis-cleaning"] && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ: на ПК видно завжди, на мобілці розгортається */}
+            <div
+              className={`${
+                expandedProjects["thiamis-cleaning"] ? "grid" : "hidden"
+              } lg:grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900`}
+            >
               
               {/* Ліва колонка: Плашка та опис */}
               <div className="lg:col-span-5 space-y-4">
@@ -1128,7 +1137,6 @@ export default function Projects() {
               </div>
 
             </div>
-            )}
 
           </div>
         )}
