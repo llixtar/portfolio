@@ -571,6 +571,7 @@ export default function Projects() {
   const lepoxy = projectsData.find((p) => p.id === "lepoxy-project");
   const tanya = projectsData.find((p) => p.id === "tanya-zaiets");
   const thiamis = projectsData.find((p) => p.id === "thiamis-cleaning");
+  const SHOW_CLEANING = false; // Тимчасово приховано за запитом
 
   const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({
     "flagship-project": false,
@@ -606,24 +607,28 @@ export default function Projects() {
               <InteractiveSwapShowcase project={flagship} />
             </div>
 
-            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ) */}
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ — СТИЛЬ СТЕЛС-ПЛАШКИ) */}
             <div className="flex flex-col items-center pt-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => toggleProject("flagship-project")}
-                className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all text-xs sm:text-sm font-mono text-neutral-300 hover:text-white shadow-lg active:scale-95 cursor-pointer select-none"
+                className="group relative inline-flex p-[1px] pb-[2.5px] bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 hover:from-neutral-400 hover:via-neutral-600 hover:to-neutral-900 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] cursor-pointer select-none active:translate-y-[1.5px] active:pb-[1px] transition-all"
               >
-                <Sliders className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors" />
-                <span>
-                  {expandedProjects["flagship-project"]
-                    ? "Згорнути опис та деталі"
-                    : "Деталі проєкту та архітектура"}
-                </span>
-                <ChevronDown
-                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
-                    expandedProjects["flagship-project"] ? "rotate-180 text-emerald-400" : ""
-                  }`}
-                />
+                <div className="relative px-3.5 py-1 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] group-hover:from-[#232733] group-hover:via-[#161822] group-hover:to-[#0c0d12] [clip-path:polygon(6px_0,calc(100%-6px)_0,100%_6px,100%_calc(100%-6px),calc(100%-6px)_100%,6px_100%,0_calc(100%-6px),0_6px)] flex items-center gap-2 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.85)] transition-colors">
+                  <span className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                    expandedProjects["flagship-project"] ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" : "bg-neutral-400 shadow-[0_0_6px_rgba(255,255,255,0.4)]"
+                  }`} />
+                  <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider uppercase font-medium text-neutral-300 group-hover:text-white transition-colors">
+                    {expandedProjects["flagship-project"]
+                      ? "Згорнути опис та деталі"
+                      : "Деталі проєкту та архітектура"}
+                  </span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                      expandedProjects["flagship-project"] ? "rotate-180 text-emerald-400" : ""
+                    }`}
+                  />
+                </div>
               </button>
             </div>
 
@@ -745,24 +750,28 @@ export default function Projects() {
               <InteractiveSwapShowcase project={lepoxy} phonePosition="top-left" />
             </div>
 
-            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ) */}
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ — СТИЛЬ СТЕЛС-ПЛАШКИ) */}
             <div className="flex flex-col items-center pt-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => toggleProject("lepoxy-project")}
-                className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all text-xs sm:text-sm font-mono text-neutral-300 hover:text-white shadow-lg active:scale-95 cursor-pointer select-none"
+                className="group relative inline-flex p-[1px] pb-[2.5px] bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 hover:from-neutral-400 hover:via-neutral-600 hover:to-neutral-900 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] cursor-pointer select-none active:translate-y-[1.5px] active:pb-[1px] transition-all"
               >
-                <Sliders className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors" />
-                <span>
-                  {expandedProjects["lepoxy-project"]
-                    ? "Згорнути опис та деталі"
-                    : "Деталі проєкту та архітектура"}
-                </span>
-                <ChevronDown
-                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
-                    expandedProjects["lepoxy-project"] ? "rotate-180 text-emerald-400" : ""
-                  }`}
-                />
+                <div className="relative px-3.5 py-1 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] group-hover:from-[#232733] group-hover:via-[#161822] group-hover:to-[#0c0d12] [clip-path:polygon(6px_0,calc(100%-6px)_0,100%_6px,100%_calc(100%-6px),calc(100%-6px)_100%,6px_100%,0_calc(100%-6px),0_6px)] flex items-center gap-2 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.85)] transition-colors">
+                  <span className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                    expandedProjects["lepoxy-project"] ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" : "bg-neutral-400 shadow-[0_0_6px_rgba(255,255,255,0.4)]"
+                  }`} />
+                  <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider uppercase font-medium text-neutral-300 group-hover:text-white transition-colors">
+                    {expandedProjects["lepoxy-project"]
+                      ? "Згорнути опис та деталі"
+                      : "Деталі проєкту та архітектура"}
+                  </span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                      expandedProjects["lepoxy-project"] ? "rotate-180 text-emerald-400" : ""
+                    }`}
+                  />
+                </div>
               </button>
             </div>
 
@@ -882,24 +891,28 @@ export default function Projects() {
               <InteractiveSwapShowcase project={tanya} phonePosition="bottom-left" />
             </div>
 
-            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ) */}
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ — СТИЛЬ СТЕЛС-ПЛАШКИ) */}
             <div className="flex flex-col items-center pt-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => toggleProject("tanya-zaiets")}
-                className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all text-xs sm:text-sm font-mono text-neutral-300 hover:text-white shadow-lg active:scale-95 cursor-pointer select-none"
+                className="group relative inline-flex p-[1px] pb-[2.5px] bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 hover:from-neutral-400 hover:via-neutral-600 hover:to-neutral-900 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] cursor-pointer select-none active:translate-y-[1.5px] active:pb-[1px] transition-all"
               >
-                <Sliders className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors" />
-                <span>
-                  {expandedProjects["tanya-zaiets"]
-                    ? "Згорнути опис та деталі"
-                    : "Деталі проєкту та архітектура"}
-                </span>
-                <ChevronDown
-                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
-                    expandedProjects["tanya-zaiets"] ? "rotate-180 text-emerald-400" : ""
-                  }`}
-                />
+                <div className="relative px-3.5 py-1 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] group-hover:from-[#232733] group-hover:via-[#161822] group-hover:to-[#0c0d12] [clip-path:polygon(6px_0,calc(100%-6px)_0,100%_6px,100%_calc(100%-6px),calc(100%-6px)_100%,6px_100%,0_calc(100%-6px),0_6px)] flex items-center gap-2 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.85)] transition-colors">
+                  <span className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                    expandedProjects["tanya-zaiets"] ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" : "bg-neutral-400 shadow-[0_0_6px_rgba(255,255,255,0.4)]"
+                  }`} />
+                  <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider uppercase font-medium text-neutral-300 group-hover:text-white transition-colors">
+                    {expandedProjects["tanya-zaiets"]
+                      ? "Згорнути опис та деталі"
+                      : "Деталі проєкту та архітектура"}
+                  </span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                      expandedProjects["tanya-zaiets"] ? "rotate-180 text-emerald-400" : ""
+                    }`}
+                  />
+                </div>
               </button>
             </div>
 
@@ -1004,8 +1017,8 @@ export default function Projects() {
           </div>
         )}
 
-        {/* 4. ЧЕТВЕРТИЙ ПРОЄКТ: КЛІНІНГОВА КОМПАНІЯ THIAMIS CLEANING */}
-        {thiamis && (
+        {/* 4. ЧЕТВЕРТИЙ ПРОЄКТ: КЛІНІНГОВА КОМПАНІЯ THIAMIS CLEANING (ТИМЧАСОВО ПРИХОВАНО) */}
+        {thiamis && SHOW_CLEANING && (
           <div className="space-y-8 md:space-y-10 pt-10">
             {/* Заголовок над мокапом */}
             <div className="text-center max-w-3xl mx-auto">
@@ -1019,24 +1032,28 @@ export default function Projects() {
               <InteractiveSwapShowcase project={thiamis} phonePosition="top-right" />
             </div>
 
-            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ) */}
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ — СТИЛЬ СТЕЛС-ПЛАШКИ) */}
             <div className="flex flex-col items-center pt-2 lg:hidden">
               <button
                 type="button"
                 onClick={() => toggleProject("thiamis-cleaning")}
-                className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all text-xs sm:text-sm font-mono text-neutral-300 hover:text-white shadow-lg active:scale-95 cursor-pointer select-none"
+                className="group relative inline-flex p-[1px] pb-[2.5px] bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 hover:from-neutral-400 hover:via-neutral-600 hover:to-neutral-900 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] cursor-pointer select-none active:translate-y-[1.5px] active:pb-[1px] transition-all"
               >
-                <Sliders className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors" />
-                <span>
-                  {expandedProjects["thiamis-cleaning"]
-                    ? "Згорнути опис та деталі"
-                    : "Деталі проєкту та архітектура"}
-                </span>
-                <ChevronDown
-                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
-                    expandedProjects["thiamis-cleaning"] ? "rotate-180 text-emerald-400" : ""
-                  }`}
-                />
+                <div className="relative px-3.5 py-1 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] group-hover:from-[#232733] group-hover:via-[#161822] group-hover:to-[#0c0d12] [clip-path:polygon(6px_0,calc(100%-6px)_0,100%_6px,100%_calc(100%-6px),calc(100%-6px)_100%,6px_100%,0_calc(100%-6px),0_6px)] flex items-center gap-2 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.85)] transition-colors">
+                  <span className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                    expandedProjects["thiamis-cleaning"] ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" : "bg-neutral-400 shadow-[0_0_6px_rgba(255,255,255,0.4)]"
+                  }`} />
+                  <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider uppercase font-medium text-neutral-300 group-hover:text-white transition-colors">
+                    {expandedProjects["thiamis-cleaning"]
+                      ? "Згорнути опис та деталі"
+                      : "Деталі проєкту та архітектура"}
+                  </span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                      expandedProjects["thiamis-cleaning"] ? "rotate-180 text-emerald-400" : ""
+                    }`}
+                  />
+                </div>
               </button>
             </div>
 

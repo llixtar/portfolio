@@ -21,6 +21,49 @@ export default function Hero() {
   const isScrollingRef = React.useRef(false);
   const justTouchedRef = React.useRef(false);
   const touchTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  const [kyivTime, setKyivTime] = useState<string>("");
+
+  // Живий годинник Києва для верхнього лівого кутка
+  useEffect(() => {
+    const updateTime = () => {
+      try {
+        const timeStr = new Intl.DateTimeFormat("uk-UA", {
+          timeZone: "Europe/Kyiv",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        }).format(new Date());
+        setKyivTime(timeStr);
+      } catch {
+        const d = new Date();
+        setKyivTime(d.toTimeString().split(" ")[0]);
+      }
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Завжди відкривати верх сайту при оновленні сторінки або повторному відкритті
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      });
+
+      const handlePageShow = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      };
+
+      window.addEventListener("pageshow", handlePageShow);
+      return () => window.removeEventListener("pageshow", handlePageShow);
+    }
+  }, []);
 
   // Автоматичне періодичне перевертання монетки з паузою для читання
   useEffect(() => {
@@ -102,6 +145,23 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[100svh] md:h-dvh md:max-h-dvh flex flex-col items-center justify-between bg-transparent px-4 sm:px-6 md:px-8 pt-5 pb-3 sm:pt-6 sm:pb-4 md:py-6 text-center overflow-hidden [contain:content]">
+      {/* ОНЛАЙН ГОДИННИК У ВЕРХНЬОМУ ЛІВОМУ КУТКУ: НАПІВПРОЗОРИЙ 3D ТЕКСТ (БЕЗ ПЛАШКИ) */}
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-7 z-20 pointer-events-none select-none flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 shadow-[0_0_8px_rgba(52,211,153,0.8),0_1px_2px_rgba(0,0,0,0.9)] animate-pulse" />
+        <span
+          className="font-mono text-[11px] sm:text-[12px] tracking-widest uppercase font-semibold text-neutral-300/70"
+          style={{
+            textShadow:
+              "0 1px 0 rgba(255,255,255,0.25), 0 2px 4px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.9)",
+          }}
+        >
+          KYIV <span className="text-neutral-500/60 font-normal">•</span>{" "}
+          <span className="text-white/80 font-mono tracking-wider">
+            {kyivTime || "00:00:00"}
+          </span>
+        </span>
+      </div>
+
       {/* ГОЛОВНИЙ ШИРОКОФОРМАТНИЙ КОНТЕНТ (СТАБІЛЬНИЙ, БЕЗ СТРИБКІВ ПРИ СКРОЛІ) */}
       <div className="relative z-10 max-w-6xl mx-auto w-full flex-1 flex flex-col justify-between items-center">
 
