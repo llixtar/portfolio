@@ -19,10 +19,12 @@ export default function Hero() {
   const [isTouching, setIsTouching] = useState(false);
   const touchStartPosRef = React.useRef({ x: 0, y: 0 });
   const isScrollingRef = React.useRef(false);
+  const justTouchedRef = React.useRef(false);
+  const touchTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   // Автоматичне періодичне перевертання монетки з паузою для читання
   useEffect(() => {
-    // Якщо користувач навів курсор або утримує пальцем — зупиняємо авто-переворот
+    // Якщо користувач навів курсор миші або утримує пальцем — зупиняємо авто-переворот
     if (isHovered || isTouching) return;
 
     const timeoutId = setTimeout(
@@ -36,11 +38,15 @@ export default function Hero() {
   }, [isFlipped, isHovered, isTouching]);
 
   // Обробка дотику на мобільних:
-  // - При торканні фіксуємо координати
-  // - Якщо палець тримають (будь-який час) — сторона НЕ змінюється сама (isTouching = true блокує авто-переворот)
-  // - Якщо палець відпустили без руху (не скролили сторінку) — це чистий тап: сторона перевертається (працює в обидва боки)
+  // 1. При торканні ставимо isTouching = true (це зупиняє таймер і блокує зміну сторони)
+  // 2. Поки палець тримають (на аві чи на досвіді) — сторона НЕ змінюється, показує поточну сторону
+  // 3. Коли палець відпускають:
+  //    - якщо це чистий тап або утримання (не скролили екран) — перевертаємо на протилежну сторону
+  //    - блокуємо синтетичний onClick браузера (щоб не було подвійного зворотного перевороту)
+  //    - скидаємо isTouching = false, таймер відновлюється і чергує сторони далі
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsTouching(true);
+    setIsHovered(false);
     isScrollingRef.current = false;
     const touch = e.touches[0];
     touchStartPosRef.current = { x: touch.clientX, y: touch.clientY };
@@ -50,13 +56,23 @@ export default function Hero() {
     const touch = e.touches[0];
     const dx = Math.abs(touch.clientX - touchStartPosRef.current.x);
     const dy = Math.abs(touch.clientY - touchStartPosRef.current.y);
-    if (dx > 8 || dy > 8) {
+    if (dx > 10 || dy > 10) {
       isScrollingRef.current = true;
     }
   };
 
   const handleTouchEnd = () => {
     setIsTouching(false);
+    setIsHovered(false);
+
+    // Захист від подвійного спрацювання синтетичного кліку
+    justTouchedRef.current = true;
+    if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
+    touchTimeoutRef.current = setTimeout(() => {
+      justTouchedRef.current = false;
+    }, 600);
+
+    // Якщо це не скрол — перевертаємо на зворотну сторону
     if (!isScrollingRef.current) {
       setIsFlipped((prev) => !prev);
     }
@@ -64,6 +80,22 @@ export default function Hero() {
 
   const handleTouchCancel = () => {
     setIsTouching(false);
+    setIsHovered(false);
+  };
+
+  const handleMouseEnter = () => {
+    if (typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches) {
+      setIsHovered(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const handleClick = () => {
+    if (justTouchedRef.current) return;
+    setIsFlipped((prev) => !prev);
   };
 
   const showBack = isFlipped;
@@ -77,17 +109,13 @@ export default function Hero() {
         <div className="w-full flex flex-col items-center pt-1 sm:pt-2">
           <div
             className="relative cursor-pointer select-none perspective-1000 group [touch-action:manipulation] [-webkit-touch-callout:none]"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onTouchCancel={handleTouchCancel}
-            onClick={() => {
-              if (!isTouching) {
-                setIsFlipped((prev) => !prev);
-              }
-            }}
+            onClick={handleClick}
             title="Натисніть або торкніться, щоб перевернути"
           >
             {/* М'яка аура світіння позаду монетки */}
