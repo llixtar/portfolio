@@ -101,11 +101,11 @@ export default function Hero() {
   const showBack = isFlipped;
 
   return (
-    <section className="relative min-h-[100svh] md:h-dvh md:max-h-dvh flex flex-col items-center justify-between bg-transparent px-4 sm:px-6 md:px-8 pt-6 pb-6 sm:pt-7 sm:pb-8 md:py-6 text-center overflow-hidden [contain:content]">
+    <section className="relative min-h-[100svh] md:h-dvh md:max-h-dvh flex flex-col items-center justify-between bg-transparent px-4 sm:px-6 md:px-8 pt-5 pb-3 sm:pt-6 sm:pb-4 md:py-6 text-center overflow-hidden [contain:content]">
       {/* ГОЛОВНИЙ ШИРОКОФОРМАТНИЙ КОНТЕНТ (СТАБІЛЬНИЙ, БЕЗ СТРИБКІВ ПРИ СКРОЛІ) */}
       <div className="relative z-10 max-w-6xl mx-auto w-full flex-1 flex flex-col justify-between items-center">
 
-        {/* 1. ВЕРХНІЙ БЛОК: 3D АВАТАР-МОНЕТКА, ПЛАШКА СТАТУСУ ТА ЗАГОЛОВОК (ПІДНЯТИЙ ВИЩЕ) */}
+        {/* 1. ВЕРХНІЙ БЛОК: 3D АВАТАР-МОНЕТКА, ПЛАШКА СТАТУСУ ТА ЗАГОЛОВОК (ЖИРНИЙ, 2 РЯДКИ) */}
         <div className="w-full flex flex-col items-center pt-1 sm:pt-2">
           <div
             className="relative cursor-pointer select-none perspective-1000 group [touch-action:manipulation] [-webkit-touch-callout:none]"
@@ -185,68 +185,69 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Заголовок (піднятий вище, органічно слідує за аватаром і статусом) */}
+          {/* Заголовок (жирний, рівно 2 рядки, без фрази "під ключ") */}
           <div className="w-full flex flex-col items-center mt-3 sm:mt-4 md:mt-5 px-2">
-            <h1 className="font-heading text-[1.95rem] xs:text-[2.2rem] sm:text-4xl md:text-5xl lg:text-[3.6rem] font-extrabold text-white tracking-tight leading-[1.15] w-full text-center max-w-4xl">
-              Розробка інтернет-магазинів та сайтів під ключ
+            <h1 className="font-heading text-[1.65rem] xs:text-[1.85rem] sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.2] w-full text-center max-w-4xl">
+              <span className="block">Розробка інтернет-магазинів</span>
+              <span className="block text-white">та сайтів</span>
             </h1>
           </div>
         </div>
 
-        {/* 2. СЕРЕДНІЙ БЛОК: ОПИС (НА ОДНІЙ ВІДСТАНІ ПОСЕРЕДИНІ МІЖ ЗАГОЛОВКОМ ТА КНОПКОЮ) */}
-        <div className="w-full flex-1 flex flex-col justify-center items-center py-2 sm:py-3">
+        {/* 2. СЕРЕДНІЙ БЛОК: ОПИС (ЕЛЕГАНТНИЙ ЧИТАБЕЛЬНИЙ РОЗМІР) */}
+        <div className="w-full flex-1 flex flex-col justify-center items-center py-1 sm:py-2">
           <div className="w-full flex flex-col items-start text-left max-w-4xl mx-auto pl-6 sm:pl-8 md:pl-0">
-            <div className="w-full space-y-3.5 sm:space-y-3.5 md:space-y-4">
+            <div className="w-full space-y-2.5 sm:space-y-3 md:space-y-3.5">
               {/* 1. Mobile First */}
-              <div className="flex items-start gap-3 sm:gap-3.5">
-                <Smartphone className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
-                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-semibold">Мобільна версія в пріоритеті</strong>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Smartphone className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-[14px] sm:text-[15px] md:text-[15.5px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Мобільна версія в пріоритеті</strong>
                   <span className="hidden md:inline">: ідеальна зручність для покупців зі смартфонів.</span>
                 </p>
               </div>
 
               {/* 2. Жива демка онлайн */}
-              <div className="flex items-start gap-3 sm:gap-3.5">
-                <Eye className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
-                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-semibold">Живе демо під час роботи</strong>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Eye className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-[14px] sm:text-[15px] md:text-[15.5px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Живе демо під час роботи</strong>
                   <span className="hidden md:inline">: бачите проєкт онлайн на кожному етапі та коригуєте в процесі.</span>
                 </p>
               </div>
 
               {/* 3. Без шаблонів */}
-              <div className="flex items-start gap-3 sm:gap-3.5">
-                <Code2 className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
-                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-semibold">Жодних шаблонів</strong>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Code2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-[14px] sm:text-[15px] md:text-[15.5px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Жодних шаблонів</strong>
                   <span className="hidden md:inline">: індивідуальна розробка та чистий швидкий код під вашу справу.</span>
                 </p>
               </div>
 
               {/* 4. Адмінка та кабінети */}
-              <div className="flex items-start gap-3 sm:gap-3.5">
-                <Sliders className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
-                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-semibold">Адмін-панелі та кабінети</strong>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Sliders className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-[14px] sm:text-[15px] md:text-[15.5px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Адмін-панелі та кабінети</strong>
                   <span className="hidden md:inline">: повне керування меню, цінами, доставкою та клієнтами.</span>
                 </p>
               </div>
 
               {/* 5. Telegram-бот бонусом */}
-              <div className="flex items-start gap-3 sm:gap-3.5">
-                <Send className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
-                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-semibold">Telegram-бот бонусом</strong>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Send className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-[14px] sm:text-[15px] md:text-[15.5px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Telegram-бот бонусом</strong>
                   <span className="hidden md:inline">: налаштованого бота для миттєвих сповіщень про замовлення дарую в подарунок.</span>
                 </p>
               </div>
 
               {/* 6. Оплата в кінці */}
-              <div className="flex items-start gap-3 sm:gap-3.5">
-                <Banknote className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
-                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-semibold">Оплата в кінці</strong>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Banknote className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
+                <p className="text-[14px] sm:text-[15px] md:text-[15.5px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-medium">Оплата в кінці</strong>
                   <span className="hidden md:inline">: розрахунок тільки після того, як ви особисто затвердите готову демку.</span>
                 </p>
               </div>
@@ -254,8 +255,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* 3. НИЖНІЙ БЛОК: ОБ'ЄМНА 3D СВІТЛО-СРІБНА КНОПКА (ПІДНЯТА ВИЩЕ ВІД НИЖНЬОГО КРАЮ) */}
-        <div className="w-full flex flex-col items-center justify-center pt-2 pb-6 sm:pb-8 md:pb-6">
+        {/* 3. НИЖНІЙ БЛОК: ОБ'ЄМНА 3D СВІТЛО-СРІБНА КНОПКА (ОПУЩЕНА НИЖЧЕ) */}
+        <div className="w-full flex flex-col items-center justify-center pt-1 pb-1 sm:pb-2 md:pb-3">
           <div className="relative group inline-flex items-center justify-center">
             {/* Реалістичні тіні левітації */}
             <div
