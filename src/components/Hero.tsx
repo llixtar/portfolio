@@ -69,12 +69,12 @@ export default function Hero() {
   const showBack = isFlipped;
 
   return (
-    <section className="relative min-h-dvh md:h-dvh md:max-h-dvh flex flex-col items-center bg-transparent px-4 sm:px-6 md:px-8 pt-8 pb-10 sm:pt-8 sm:pb-8 md:py-6 text-center overflow-hidden">
+    <section className="relative min-h-dvh md:h-dvh md:max-h-dvh flex flex-col items-center bg-transparent px-4 sm:px-6 md:px-8 pt-6 pb-6 sm:pt-7 sm:pb-8 md:py-6 text-center overflow-hidden">
       {/* ГОЛОВНИЙ ШИРОКОФОРМАТНИЙ КОНТЕНТ (РОЗПОДІЛЕНИЙ ПО ВИСОТІ ВІД ВЕРХУ ДО НИЗУ) */}
-      <div className="relative z-10 max-w-6xl mx-auto w-full flex-1 flex flex-col justify-between items-center py-1 sm:py-2">
+      <div className="relative z-10 max-w-6xl mx-auto w-full flex-1 flex flex-col justify-between items-center">
 
-        {/* 1. ВЕРХНІЙ БЛОК: 3D АВАТАР-МОНЕТКА (ПОВНИЙ РОЗМІР, ПРИРОДНЕ РОЗМІЩЕННЯ) ТА ПЛАШКА СТАТУСУ */}
-        <div className="flex flex-col items-center pt-2 sm:pt-1">
+        {/* 1. ВЕРХНІЙ БЛОК: 3D АВАТАР-МОНЕТКА, ПЛАШКА СТАТУСУ ТА ЗАГОЛОВОК (ПІДНЯТИЙ ВИЩЕ) */}
+        <div className="w-full flex flex-col items-center pt-1 sm:pt-2">
           <div
             className="relative cursor-pointer select-none perspective-1000 group [touch-action:manipulation] [-webkit-touch-callout:none]"
             onMouseEnter={() => setIsHovered(true)}
@@ -148,7 +148,7 @@ export default function Hero() {
           </div>
 
           {/* Плашка під аватаром: 3D СТЕЛС-БЕЙДЖ */}
-          <div className="relative inline-flex p-[1px] pb-[2.5px] mt-4 sm:mt-4.5 bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] select-none">
+          <div className="relative inline-flex p-[1px] pb-[2.5px] mt-3 sm:mt-4 bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] select-none">
             <div className="relative px-3.5 py-1 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] [clip-path:polygon(6px_0,calc(100%-6px)_0,100%_6px,100%_calc(100%-6px),calc(100%-6px)_100%,6px_100%,0_calc(100%-6px),0_6px)] flex items-center gap-2 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.85)]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)] animate-pulse" />
               <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider uppercase font-medium text-neutral-300">
@@ -156,18 +156,17 @@ export default function Hero() {
               </span>
             </div>
           </div>
+
+          {/* Заголовок (піднятий вище, органічно слідує за аватаром і статусом) */}
+          <div className="w-full flex flex-col items-center mt-3 sm:mt-4 md:mt-5 px-2">
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white tracking-tight leading-[1.18] w-full text-center max-w-4xl">
+              Розробка інтернет-магазинів та сайтів під ключ
+            </h1>
+          </div>
         </div>
 
-        {/* 2. СЕРЕДНІЙ БЛОК: ЗАГОЛОВОК (ПОВНОЦІННИЙ ВПЕВНЕНИЙ РОЗМІР) */}
-        <div className="w-full flex flex-col items-center my-auto py-3 sm:py-4">
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white tracking-tight leading-[1.18] w-full text-center max-w-4xl px-2">
-            Розробка інтернет-магазинів та сайтів під ключ
-          </h1>
-        </div>
-
-        {/* 3. НИЖНІЙ БЛОК: ПЕРЕВАГИ (З ВІДСТУПОМ ВІД ЛІВОГО КРАЮ) + ОБ'ЄМНА 3D СВІТЛО-СРІБНА КНОПКА */}
-        <div className="w-full flex flex-col items-center space-y-7 sm:space-y-8 md:space-y-9 pb-2 sm:pb-3">
-          {/* ОПИС: на комп'ютері повні розгорнуті рядки, на мобілці сфокусовані жирні тези з відступом від лівого краю */}
+        {/* 2. СЕРЕДНІЙ БЛОК: ОПИС (НА ОДНІЙ ВІДСТАНІ ПОСЕРЕДИНІ МІЖ ЗАГОЛОВКОМ ТА КНОПКОЮ) */}
+        <div className="w-full flex-1 flex flex-col justify-center items-center my-auto py-2 sm:py-3">
           <div className="w-full flex flex-col items-start text-left max-w-4xl mx-auto pl-6 sm:pl-8 md:pl-0">
             <div className="w-full space-y-3 sm:space-y-3 md:space-y-3.5">
               {/* 1. Mobile First */}
@@ -225,34 +224,34 @@ export default function Hero() {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* МАКСИМАЛЬНО ОБ'ЄМНА 3D СВІТЛО-СРІБНА КНОПКА З ВЕЛИКИМ ШРИФТОМ (ЛЕВІТАЦІЯ) */}
-          <div className="w-full flex flex-col items-center justify-center pt-2 sm:pt-3 pb-2">
-            <div className="relative group inline-flex items-center justify-center">
-              {/* Реалістичні тіні левітації */}
-              <div
-                className="absolute -bottom-2 w-[88%] h-5 rounded-[50%] bg-black/95 blur-md pointer-events-none animate-float-shadow transition-all duration-300 group-hover:scale-110 group-hover:opacity-90"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute -bottom-4 w-[96%] h-7 rounded-[50%] bg-black/75 blur-xl pointer-events-none animate-float-shadow"
-                aria-hidden="true"
-              />
+        {/* 3. НИЖНІЙ БЛОК: ОБ'ЄМНА 3D СВІТЛО-СРІБНА КНОПКА (ПІДНЯТА ВИЩЕ ВІД НИЖНЬОГО КРАЮ) */}
+        <div className="w-full flex flex-col items-center justify-center pt-2 pb-6 sm:pb-8 md:pb-6">
+          <div className="relative group inline-flex items-center justify-center">
+            {/* Реалістичні тіні левітації */}
+            <div
+              className="absolute -bottom-2 w-[88%] h-5 rounded-[50%] bg-black/95 blur-md pointer-events-none animate-float-shadow transition-all duration-300 group-hover:scale-110 group-hover:opacity-90"
+              aria-hidden="true"
+            />
+            <div
+              className="absolute -bottom-4 w-[96%] h-7 rounded-[50%] bg-black/75 blur-xl pointer-events-none animate-float-shadow"
+              aria-hidden="true"
+            />
 
-              <a
-                href="#projects"
-                className="relative inline-flex p-[2px] pb-[5px] sm:pb-[6px] bg-gradient-to-b from-[#e5e7eb] via-[#6b7280] to-[#1f2937] hover:from-white hover:via-[#9ca3af] hover:to-[#374151] [clip-path:polygon(14px_0,calc(100%-14px)_0,100%_14px,100%_calc(100%-14px),calc(100%-14px)_100%,14px_100%,0_calc(100%-14px),0_14px)] transition-all duration-300 hover:drop-shadow-[0_10px_28px_rgba(255,255,255,0.28)] cursor-pointer select-none active:translate-y-[3px] active:pb-[2px] animate-float drop-shadow-[0_8px_0_#111318,0_16px_32px_rgba(0,0,0,0.95)]"
-              >
-                {/* Внутрішня лицьова 3D-грань кнопки (масивне світле срібло з фаскою) */}
-                <div className="relative w-full h-full px-9 py-4 sm:px-14 sm:py-4.5 md:px-16 md:py-5 bg-gradient-to-b from-[#ffffff] via-[#e5e7eb] to-[#c7cbd2] group-hover:from-[#ffffff] group-hover:via-[#edf0f4] group-hover:to-[#d2d6dd] [clip-path:polygon(12px_0,calc(100%-12px)_0,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0_calc(100%-12px),0_12px)] flex items-center justify-center overflow-hidden shadow-[inset_0_2.5px_0_rgba(255,255,255,1),inset_0_-3px_0_rgba(156,163,175,0.7),inset_0_0_14px_rgba(255,255,255,0.6)] transition-all duration-300">
+            <a
+              href="#projects"
+              className="relative inline-flex p-[2px] pb-[5px] sm:pb-[6px] bg-gradient-to-b from-[#e5e7eb] via-[#6b7280] to-[#1f2937] hover:from-white hover:via-[#9ca3af] hover:to-[#374151] [clip-path:polygon(14px_0,calc(100%-14px)_0,100%_14px,100%_calc(100%-14px),calc(100%-14px)_100%,14px_100%,0_calc(100%-14px),0_14px)] transition-all duration-300 hover:drop-shadow-[0_10px_28px_rgba(255,255,255,0.28)] cursor-pointer select-none active:translate-y-[3px] active:pb-[2px] animate-float drop-shadow-[0_8px_0_#111318,0_16px_32px_rgba(0,0,0,0.95)]"
+            >
+              {/* Внутрішня лицьова 3D-грань кнопки (масивне світле срібло з фаскою) */}
+              <div className="relative w-full h-full px-9 py-4 sm:px-14 sm:py-4.5 md:px-16 md:py-5 bg-gradient-to-b from-[#ffffff] via-[#e5e7eb] to-[#c7cbd2] group-hover:from-[#ffffff] group-hover:via-[#edf0f4] group-hover:to-[#d2d6dd] [clip-path:polygon(12px_0,calc(100%-12px)_0,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0_calc(100%-12px),0_12px)] flex items-center justify-center overflow-hidden shadow-[inset_0_2.5px_0_rgba(255,255,255,1),inset_0_-3px_0_rgba(156,163,175,0.7),inset_0_0_14px_rgba(255,255,255,0.6)] transition-all duration-300">
 
-                  {/* Збільшений, виразний темний шрифт */}
-                  <span className="font-mono text-base sm:text-base md:text-[18px] tracking-[0.2em] sm:tracking-[0.24em] uppercase font-black text-neutral-950 animate-text-wave-dark select-none drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-                    ПЕРЕГЛЯНУТИ РОБОТИ
-                  </span>
-                </div>
-              </a>
-            </div>
+                {/* Збільшений, виразний темний шрифт */}
+                <span className="font-mono text-base sm:text-base md:text-[18px] tracking-[0.2em] sm:tracking-[0.24em] uppercase font-black text-neutral-950 animate-text-wave-dark select-none drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
+                  ПЕРЕГЛЯНУТИ РОБОТИ
+                </span>
+              </div>
+            </a>
           </div>
         </div>
 
