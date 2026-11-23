@@ -28,6 +28,7 @@ import {
   Calculator,
   PhoneCall,
   ShieldCheck,
+  ChevronDown,
 } from "lucide-react";
 import { projectsData, Project } from "@/data/projects";
 
@@ -69,20 +70,6 @@ function InteractiveSwapShowcase({
 
   const desktopImage = project.desktopImage;
   const mobileImage = project.mobileImage;
-
-  // Обробник ручного скролу:
-  // - При скролі ВНИЗ: коли доходимо до футера першого скріна і переходимо в другий (scrollTop >= H),
-  //   непомітно повертаємо на початок першого (scrollTop -= H) — нескінченний циклічний скрол униз!
-  // - При скролі ВГОРУ: жодних циклів немає, браузер нативно зупиняється на хедері (scrollTop = 0).
-  const handleCyclicManualScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    const H = container.scrollHeight / 2;
-    if (H <= 50) return;
-
-    if (container.scrollTop >= H) {
-      container.scrollTop -= H;
-    }
-  };
 
   const swapDevice = (newDevice: "desktop" | "phone") => {
     setActiveDevice(newDevice);
@@ -192,7 +179,6 @@ function InteractiveSwapShowcase({
             {/* Внутрішній екран смартфона */}
             <div
               ref={activeDevice === "phone" ? mobilePhoneForegroundRef : mobilePhoneBgRef}
-              onScroll={activeDevice === "phone" ? handleCyclicManualScroll : undefined}
               className={`relative w-full flex-1 overflow-x-hidden bg-neutral-950 border border-neutral-800/80 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-neutral-800 transition-all ${
                 activeDevice === "phone"
                   ? "overflow-y-auto cursor-grab active:cursor-grabbing rounded-[30px]"
@@ -207,12 +193,14 @@ function InteractiveSwapShowcase({
                     className="w-full h-auto block select-none pointer-events-none"
                     onError={() => setMobileError(true)}
                   />
-                  <img
-                    src={mobileImage}
-                    alt=""
-                    aria-hidden="true"
-                    className="w-full h-auto block select-none pointer-events-none"
-                  />
+                  {activeDevice !== "phone" && (
+                    <img
+                      src={mobileImage}
+                      alt=""
+                      aria-hidden="true"
+                      className="w-full h-auto block select-none pointer-events-none"
+                    />
+                  )}
                 </div>
               ) : null}
             </div>
@@ -279,10 +267,10 @@ function InteractiveSwapShowcase({
                   activeDevice === "desktop" ? "h-9 px-3" : "h-4 px-1.5"
                 }`}
               >
-                <div className="flex items-center gap-1">
-                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-red-500/90" />
-                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-yellow-500/90" />
-                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-500/90" />
+                <div className="flex items-center gap-0.5 sm:gap-1">
+                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-red-500/90" />
+                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-yellow-500/90" />
+                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-green-500/90" />
                 </div>
 
                 {/* Домен по центру у великому вигляді */}
@@ -309,7 +297,6 @@ function InteractiveSwapShowcase({
               {/* Скрол десктопного сайту */}
               <div
                 ref={activeDevice === "desktop" ? mobileDesktopForegroundRef : mobileDesktopBgRef}
-                onScroll={activeDevice === "desktop" ? handleCyclicManualScroll : undefined}
                 className={`relative w-full flex-1 overflow-x-hidden bg-neutral-950 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-neutral-800 ${
                   activeDevice === "desktop"
                     ? "overflow-y-auto cursor-grab active:cursor-grabbing"
@@ -324,12 +311,14 @@ function InteractiveSwapShowcase({
                       className="w-full h-auto block select-none pointer-events-none"
                       onError={() => setDesktopError(true)}
                     />
-                    <img
-                      src={desktopImage}
-                      alt=""
-                      aria-hidden="true"
-                      className="w-full h-auto block select-none pointer-events-none"
-                    />
+                    {activeDevice !== "desktop" && (
+                      <img
+                        src={desktopImage}
+                        alt=""
+                        aria-hidden="true"
+                        className="w-full h-auto block select-none pointer-events-none"
+                      />
+                    )}
                   </div>
                 ) : null}
               </div>
@@ -385,10 +374,10 @@ function InteractiveSwapShowcase({
               <div className="relative w-full h-[min(500px,52vh)] md:h-[min(540px,56vh)] rounded-[22px] overflow-hidden bg-black border border-black shadow-inner flex flex-col">
                 {/* Шапка Safari */}
                 <div className="h-11 bg-neutral-950/95 border-b border-neutral-800/90 px-5 flex items-center justify-between shrink-0 z-20 backdrop-blur-md">
-                  <div className="flex items-center gap-2 w-24 shrink-0">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/90" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/90" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/90" />
+                  <div className="flex items-center gap-1.5 w-24 shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500/90" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/90" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500/90" />
                   </div>
 
                   <div className="flex-1 flex justify-center">
@@ -418,7 +407,6 @@ function InteractiveSwapShowcase({
                 {/* Скрол монітора */}
                 <div
                   ref={activeDevice === "desktop" ? desktopMonitorForegroundRef : desktopMonitorBgRef}
-                  onScroll={activeDevice === "desktop" ? handleCyclicManualScroll : undefined}
                   className={`relative w-full flex-1 overflow-x-hidden bg-neutral-950 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-neutral-800 hover:[&::-webkit-scrollbar-thumb]:bg-neutral-700 [&::-webkit-scrollbar-thumb]:rounded-full ${
                     activeDevice === "desktop"
                       ? "overflow-y-auto cursor-grab active:cursor-grabbing"
@@ -433,12 +421,14 @@ function InteractiveSwapShowcase({
                         className="w-full h-auto block select-none pointer-events-none"
                         onError={() => setDesktopError(true)}
                       />
-                      <img
-                        src={desktopImage}
-                        alt=""
-                        aria-hidden="true"
-                        className="w-full h-auto block select-none pointer-events-none"
-                      />
+                      {activeDevice !== "desktop" && (
+                        <img
+                          src={desktopImage}
+                          alt=""
+                          aria-hidden="true"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                      )}
                     </div>
                   ) : null}
                 </div>
@@ -495,7 +485,6 @@ function InteractiveSwapShowcase({
               {/* Внутрішній екран iPhone */}
               <div
                 ref={activeDevice === "phone" ? desktopPhoneForegroundRef : desktopPhoneBgRef}
-                onScroll={activeDevice === "phone" ? handleCyclicManualScroll : undefined}
                 className={`relative w-full flex-1 overflow-x-hidden bg-neutral-950 border border-neutral-800/80 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-neutral-800 transition-all ${
                   activeDevice === "phone"
                     ? "overflow-y-auto cursor-grab active:cursor-grabbing rounded-[34px]"
@@ -510,12 +499,14 @@ function InteractiveSwapShowcase({
                       className="w-full h-auto block select-none pointer-events-none"
                       onError={() => setMobileError(true)}
                     />
-                    <img
-                      src={mobileImage}
-                      alt=""
-                      aria-hidden="true"
-                      className="w-full h-auto block select-none pointer-events-none"
-                    />
+                    {activeDevice !== "phone" && (
+                      <img
+                        src={mobileImage}
+                        alt=""
+                        aria-hidden="true"
+                        className="w-full h-auto block select-none pointer-events-none"
+                      />
+                    )}
                   </div>
                 ) : null}
               </div>
@@ -555,6 +546,20 @@ export default function Projects() {
   const tanya = projectsData.find((p) => p.id === "tanya-zaiets");
   const thiamis = projectsData.find((p) => p.id === "thiamis-cleaning");
 
+  const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({
+    "flagship-project": false,
+    "lepoxy-project": false,
+    "tanya-zaiets": false,
+    "thiamis-cleaning": false,
+  });
+
+  const toggleProject = (id: string) => {
+    setExpandedProjects((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   return (
     <section id="projects" className="relative py-28 px-4 bg-transparent overflow-hidden">
       <div className="relative z-10 max-w-6xl mx-auto space-y-24">
@@ -575,8 +580,30 @@ export default function Projects() {
               <InteractiveSwapShowcase project={flagship} />
             </div>
 
-            {/* Б) ДЕТАЛЬНИЙ ОПИС ПРОЄКТУ ТА АРХІТЕКТУРА СИСТЕМИ */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
+            {/* Кнопка розгортання / згортання опису */}
+            <div className="flex flex-col items-center pt-2">
+              <button
+                type="button"
+                onClick={() => toggleProject("flagship-project")}
+                className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all text-xs sm:text-sm font-mono text-neutral-300 hover:text-white shadow-lg active:scale-95 cursor-pointer select-none"
+              >
+                <Sliders className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors" />
+                <span>
+                  {expandedProjects["flagship-project"]
+                    ? "Згорнути опис та деталі"
+                    : "Деталі проєкту та архітектура"}
+                </span>
+                <ChevronDown
+                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                    expandedProjects["flagship-project"] ? "rotate-180 text-emerald-400" : ""
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ПРОЄКТУ ТА АРХІТЕКТУРА СИСТЕМИ (ЗГОРНУТИЙ ЗА ЗАМОВЧУВАННЯМ) */}
+            {expandedProjects["flagship-project"] && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
               
               {/* Ліва колонка: Плашка та опис */}
               <div className="lg:col-span-5 space-y-4">
@@ -670,6 +697,7 @@ export default function Projects() {
               </div>
 
             </div>
+            )}
 
           </div>
         )}
@@ -689,8 +717,30 @@ export default function Projects() {
               <InteractiveSwapShowcase project={lepoxy} phonePosition="top-left" />
             </div>
 
-            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
+            {/* Кнопка розгортання / згортання опису */}
+            <div className="flex flex-col items-center pt-2">
+              <button
+                type="button"
+                onClick={() => toggleProject("lepoxy-project")}
+                className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all text-xs sm:text-sm font-mono text-neutral-300 hover:text-white shadow-lg active:scale-95 cursor-pointer select-none"
+              >
+                <Sliders className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors" />
+                <span>
+                  {expandedProjects["lepoxy-project"]
+                    ? "Згорнути опис та деталі"
+                    : "Деталі проєкту та архітектура"}
+                </span>
+                <ChevronDown
+                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                    expandedProjects["lepoxy-project"] ? "rotate-180 text-emerald-400" : ""
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ (ЗГОРНУТИЙ ЗА ЗАМОВЧУВАННЯМ) */}
+            {expandedProjects["lepoxy-project"] && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
               
               {/* Ліва колонка: Плашка та опис */}
               <div className="lg:col-span-5 space-y-4">
@@ -782,6 +832,7 @@ export default function Projects() {
               </div>
 
             </div>
+            )}
 
           </div>
         )}
@@ -801,8 +852,30 @@ export default function Projects() {
               <InteractiveSwapShowcase project={tanya} phonePosition="bottom-left" />
             </div>
 
-            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
+            {/* Кнопка розгортання / згортання опису */}
+            <div className="flex flex-col items-center pt-2">
+              <button
+                type="button"
+                onClick={() => toggleProject("tanya-zaiets")}
+                className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all text-xs sm:text-sm font-mono text-neutral-300 hover:text-white shadow-lg active:scale-95 cursor-pointer select-none"
+              >
+                <Sliders className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors" />
+                <span>
+                  {expandedProjects["tanya-zaiets"]
+                    ? "Згорнути опис та деталі"
+                    : "Деталі проєкту та архітектура"}
+                </span>
+                <ChevronDown
+                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                    expandedProjects["tanya-zaiets"] ? "rotate-180 text-emerald-400" : ""
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ (ЗГОРНУТИЙ ЗА ЗАМОВЧУВАННЯМ) */}
+            {expandedProjects["tanya-zaiets"] && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
               
               {/* Ліва колонка: Плашка та опис */}
               <div className="lg:col-span-5 space-y-4">
@@ -894,6 +967,7 @@ export default function Projects() {
               </div>
 
             </div>
+            )}
 
           </div>
         )}
@@ -913,8 +987,30 @@ export default function Projects() {
               <InteractiveSwapShowcase project={thiamis} phonePosition="top-right" />
             </div>
 
-            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
+            {/* Кнопка розгортання / згортання опису */}
+            <div className="flex flex-col items-center pt-2">
+              <button
+                type="button"
+                onClick={() => toggleProject("thiamis-cleaning")}
+                className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all text-xs sm:text-sm font-mono text-neutral-300 hover:text-white shadow-lg active:scale-95 cursor-pointer select-none"
+              >
+                <Sliders className="w-3.5 h-3.5 text-neutral-400 group-hover:text-emerald-400 transition-colors" />
+                <span>
+                  {expandedProjects["thiamis-cleaning"]
+                    ? "Згорнути опис та деталі"
+                    : "Деталі проєкту та архітектура"}
+                </span>
+                <ChevronDown
+                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                    expandedProjects["thiamis-cleaning"] ? "rotate-180 text-emerald-400" : ""
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ (ЗГОРНУТИЙ ЗА ЗАМОВЧУВАННЯМ) */}
+            {expandedProjects["thiamis-cleaning"] && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900">
               
               {/* Ліва колонка: Плашка та опис */}
               <div className="lg:col-span-5 space-y-4">
@@ -1006,6 +1102,7 @@ export default function Projects() {
               </div>
 
             </div>
+            )}
 
           </div>
         )}

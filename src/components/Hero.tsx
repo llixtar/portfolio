@@ -17,7 +17,8 @@ export default function Hero() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isTouching, setIsTouching] = useState(false);
-  const touchStartTimeRef = React.useRef(0);
+  const touchStartPosRef = React.useRef({ x: 0, y: 0 });
+  const isScrollingRef = React.useRef(false);
 
   // Автоматичне періодичне перевертання монетки з паузою для читання
   useEffect(() => {
@@ -28,32 +29,44 @@ export default function Hero() {
       () => {
         setIsFlipped((prev) => !prev);
       },
-      isFlipped ? 3500 : 5500 // 3.5 сек показуємо зворот (інфу), 5.5 сек показуємо фото
+      isFlipped ? 4500 : 6500
     );
 
     return () => clearTimeout(timeoutId);
   }, [isFlipped, isHovered, isTouching]);
 
-  // Обробка дотику на мобільних: утримання пальця фіксує зворот
-  const handleTouchStart = () => {
-    touchStartTimeRef.current = Date.now();
+  // Обробка дотику на мобільних:
+  // - При торканні фіксуємо координати
+  // - Якщо палець тримають (будь-який час) — сторона НЕ змінюється сама (isTouching = true блокує авто-переворот)
+  // - Якщо палець відпустили без руху (не скролили сторінку) — це чистий тап: сторона перевертається (працює в обидва боки)
+  const handleTouchStart = (e: React.TouchEvent) => {
     setIsTouching(true);
+    isScrollingRef.current = false;
+    const touch = e.touches[0];
+    touchStartPosRef.current = { x: touch.clientX, y: touch.clientY };
   };
 
-  const handleTouchEnd = () => {
-    const duration = Date.now() - touchStartTimeRef.current;
-    setIsTouching(false);
-
-    if (duration >= 250) {
-      // Якщо палець утримували: при відпусканні одразу повертаємося на лицьову сторону
-      setIsFlipped(false);
-    } else {
-      // Якщо це був швидкий тап: перевертаємо та даємо 3.5 сек спокійно прочитати
-      setIsFlipped(true);
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    const dx = Math.abs(touch.clientX - touchStartPosRef.current.x);
+    const dy = Math.abs(touch.clientY - touchStartPosRef.current.y);
+    if (dx > 8 || dy > 8) {
+      isScrollingRef.current = true;
     }
   };
 
-  const showBack = isHovered || isTouching || isFlipped;
+  const handleTouchEnd = () => {
+    setIsTouching(false);
+    if (!isScrollingRef.current) {
+      setIsFlipped((prev) => !prev);
+    }
+  };
+
+  const handleTouchCancel = () => {
+    setIsTouching(false);
+  };
+
+  const showBack = isFlipped;
 
   return (
     <section className="relative min-h-dvh md:h-dvh md:max-h-dvh flex flex-col items-center bg-transparent px-4 sm:px-6 md:px-8 pt-10 pb-10 sm:pt-8 sm:pb-8 md:py-6 text-center overflow-hidden">
@@ -65,23 +78,17 @@ export default function Hero() {
           <div
             className="relative cursor-pointer select-none perspective-1000 group [touch-action:manipulation] [-webkit-touch-callout:none]"
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => {
-              setIsHovered(false);
-              setIsFlipped(false);
-            }}
+            onMouseLeave={() => setIsHovered(false)}
             onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            onTouchCancel={() => {
-              setIsTouching(false);
-              setIsFlipped(false);
-            }}
+            onTouchCancel={handleTouchCancel}
             onClick={() => {
-              // Додатковий клік для десктопу
               if (!isTouching) {
                 setIsFlipped((prev) => !prev);
               }
             }}
-            title="Натисніть або наведіть, щоб переглянути статус"
+            title="Натисніть або торкніться, щоб перевернути"
           >
             {/* М'яка аура світіння позаду монетки */}
             <div className="absolute -inset-2 rounded-full bg-white/10 blur-xl pointer-events-none transition-all duration-500 group-hover:bg-white/20 group-hover:scale-110" />
@@ -158,83 +165,83 @@ export default function Hero() {
           </h1>
         </div>
 
-        {/* 3. НИЖНІЙ БЛОК: ОПИС + ВІДСТУП З ПОВІТРЯМ + 3D СТЕЛС-КНОПКА */}
-        <div className="w-full flex flex-col items-center space-y-8 sm:space-y-9 md:space-y-9 pb-2 sm:pb-3">
-          {/* ОПИС ПІДТЯГНУТИЙ ДО ЛІВОГО КРАЮ */}
-          <div className="w-full flex flex-col items-start text-left">
-            <div className="w-full max-w-4xl space-y-3 sm:space-y-3 md:space-y-3.5">
+        {/* 3. НИЖНІЙ БЛОК: ЧИСТІ ПЕРЕВАГИ (ЛАКОНІЧНИЙ СПИСОК) + 3D СВІТЛО-СРІБНА КНОПКА */}
+        <div className="w-full flex flex-col items-center space-y-7 sm:space-y-8 md:space-y-8 pb-2 sm:pb-3">
+          {/* ЛАКОНІЧНІ ТЕЗИ (БЕЗ ЗАЙВОГО ТЕКСТУ, ЧІТКИЙ ФОКУС) */}
+          <div className="w-full max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-x-10 sm:gap-y-3.5 text-left">
               {/* 1. Mobile First */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Smartphone className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm sm:text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Мобільна версія в пріоритеті:</strong> ідеальна зручність для покупців зі смартфонів.
-                </p>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <Smartphone className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
+                <span className="text-sm sm:text-[15px] text-white font-medium">
+                  Мобільна версія в пріоритеті
+                </span>
               </div>
 
               {/* 2. Жива демка онлайн */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Eye className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm sm:text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Живе демо під час роботи:</strong> бачите проєкт онлайн на кожному етапі та коригуєте в процесі.
-                </p>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <Eye className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
+                <span className="text-sm sm:text-[15px] text-white font-medium">
+                  Живе демо під час роботи
+                </span>
               </div>
 
               {/* 3. Без шаблонів */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Code2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm sm:text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Жодних шаблонів:</strong> індивідуальна розробка та чистий швидкий код під вашу справу.
-                </p>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <Code2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
+                <span className="text-sm sm:text-[15px] text-white font-medium">
+                  Жодних шаблонів
+                </span>
               </div>
 
               {/* 4. Адмінка та кабінети */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Sliders className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm sm:text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Адмін-панелі та кабінети:</strong> повне керування меню, цінами, доставкою та клієнтами.
-                </p>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <Sliders className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
+                <span className="text-sm sm:text-[15px] text-white font-medium">
+                  Адмін-панелі та кабінети
+                </span>
               </div>
 
               {/* 5. Telegram-бот бонусом */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Send className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm sm:text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Telegram-бот бонусом:</strong> налаштованого бота для миттєвих сповіщень про замовлення дарую в подарунок.
-                </p>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <Send className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
+                <span className="text-sm sm:text-[15px] text-white font-medium">
+                  Telegram-бот бонусом
+                </span>
               </div>
 
               {/* 6. Оплата в кінці */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Banknote className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm sm:text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Оплата в кінці:</strong> розрахунок тільки після того, як ви особисто затвердите готову демку.
-                </p>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <Banknote className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0" />
+                <span className="text-sm sm:text-[15px] text-white font-medium">
+                  Оплата в кінці
+                </span>
               </div>
             </div>
           </div>
 
-          {/* 3D СТЕЛС-КНОПКА, ЩО ПАРИТЬ НАД СТОРІНКОЮ (ЛЕВІТАЦІЯ) */}
+          {/* 3D СВІТЛО-СРІБНА КНОПКА З ТЕМНИМ ТЕКСТОМ ТА БОРДЕРОМ (ЛЕВІТАЦІЯ) */}
           <div className="w-full flex flex-col items-center justify-center pt-2 sm:pt-2 pb-2">
             <div className="relative group inline-flex items-center justify-center">
-              {/* Нижня реалістична тінь левітації (синхронно блідне і стискається при підйомі) */}
+              {/* Нижня реалістична тінь левітації */}
               <div
-                className="absolute -bottom-2 w-[85%] h-4 rounded-[50%] bg-black/80 blur-md pointer-events-none animate-float-shadow transition-all duration-300 group-hover:scale-110 group-hover:opacity-80"
+                className="absolute -bottom-2 w-[85%] h-4 rounded-[50%] bg-black/90 blur-md pointer-events-none animate-float-shadow transition-all duration-300 group-hover:scale-110 group-hover:opacity-90"
                 aria-hidden="true"
               />
               <div
-                className="absolute -bottom-3.5 w-[95%] h-6 rounded-[50%] bg-black/60 blur-xl pointer-events-none animate-float-shadow"
+                className="absolute -bottom-3.5 w-[95%] h-6 rounded-[50%] bg-black/70 blur-xl pointer-events-none animate-float-shadow"
                 aria-hidden="true"
               />
 
               <a
                 href="#projects"
-                className="relative inline-flex p-[1.5px] pb-[4px] bg-gradient-to-b from-neutral-600 via-neutral-700 to-neutral-900 hover:from-neutral-400 hover:to-neutral-600 [clip-path:polygon(12px_0,calc(100%-12px)_0,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0_calc(100%-12px),0_12px)] transition-all duration-300 hover:drop-shadow-[0_8px_24px_rgba(255,255,255,0.25)] cursor-pointer select-none active:translate-y-[2px] animate-float drop-shadow-[0_12px_22px_rgba(0,0,0,0.85)]"
+                className="relative inline-flex p-[1.5px] pb-[4px] bg-gradient-to-b from-neutral-800 via-neutral-900 to-black hover:from-neutral-700 hover:to-neutral-900 [clip-path:polygon(12px_0,calc(100%-12px)_0,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0_calc(100%-12px),0_12px)] transition-all duration-300 hover:drop-shadow-[0_8px_24px_rgba(255,255,255,0.2)] cursor-pointer select-none active:translate-y-[2px] animate-float drop-shadow-[0_12px_22px_rgba(0,0,0,0.85)]"
               >
-                {/* Внутрішня 3D-грань кнопки */}
-                <div className="relative w-full h-full px-9 py-3.5 sm:px-12 sm:py-4 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] group-hover:from-[#222531] group-hover:to-[#0e1017] [clip-path:polygon(11px_0,calc(100%-11px)_0,100%_11px,100%_calc(100%-11px),calc(100%-11px)_100%,11px_100%,0_calc(100%-11px),0_11px)] flex items-center justify-center overflow-hidden shadow-[inset_0_1.5px_0_rgba(255,255,255,0.2),inset_0_-1.5px_0_rgba(0,0,0,0.8)] transition-colors duration-300">
+                {/* Внутрішня 3D-грань кнопки: світло-срібна інверсія */}
+                <div className="relative w-full h-full px-9 py-3.5 sm:px-12 sm:py-4 bg-gradient-to-b from-[#ffffff] via-[#e5e7eb] to-[#c7cbd1] group-hover:from-[#ffffff] group-hover:via-[#edf0f3] group-hover:to-[#d2d6dc] [clip-path:polygon(11px_0,calc(100%-11px)_0,100%_11px,100%_calc(100%-11px),calc(100%-11px)_100%,11px_100%,0_calc(100%-11px),0_11px)] flex items-center justify-center overflow-hidden shadow-[inset_0_1.5px_0_rgba(255,255,255,0.9),inset_0_-2px_0_rgba(0,0,0,0.2)] transition-colors duration-300">
 
-                  {/* Чистий монохромний текст з анімованою світловою хвилею */}
-                  <span className="font-mono text-xs sm:text-sm tracking-[0.22em] uppercase font-semibold animate-text-wave select-none">
+                  {/* Темний текст із насиченим контуром */}
+                  <span className="font-mono text-xs sm:text-sm tracking-[0.22em] uppercase font-bold text-neutral-950 animate-text-wave-dark select-none">
                     ПЕРЕГЛЯНУТИ РОБОТИ
                   </span>
                 </div>
