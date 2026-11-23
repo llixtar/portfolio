@@ -244,10 +244,10 @@ export default function Hero() {
                 className="relative inline-flex p-[2px] pb-[5px] sm:pb-[6px] bg-gradient-to-b from-[#e5e7eb] via-[#6b7280] to-[#1f2937] hover:from-white hover:via-[#9ca3af] hover:to-[#374151] [clip-path:polygon(14px_0,calc(100%-14px)_0,100%_14px,100%_calc(100%-14px),calc(100%-14px)_100%,14px_100%,0_calc(100%-14px),0_14px)] transition-all duration-300 hover:drop-shadow-[0_10px_28px_rgba(255,255,255,0.28)] cursor-pointer select-none active:translate-y-[3px] active:pb-[2px] animate-float drop-shadow-[0_8px_0_#111318,0_16px_32px_rgba(0,0,0,0.95)]"
               >
                 {/* Внутрішня лицьова 3D-грань кнопки (масивне світле срібло з фаскою) */}
-                <div className="relative w-full h-full px-10 py-4 sm:px-14 sm:py-4.5 md:px-16 md:py-5 bg-gradient-to-b from-[#ffffff] via-[#e5e7eb] to-[#c7cbd2] group-hover:from-[#ffffff] group-hover:via-[#edf0f4] group-hover:to-[#d2d6dd] [clip-path:polygon(12px_0,calc(100%-12px)_0,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0_calc(100%-12px),0_12px)] flex items-center justify-center overflow-hidden shadow-[inset_0_2.5px_0_rgba(255,255,255,1),inset_0_-3px_0_rgba(156,163,175,0.7),inset_0_0_14px_rgba(255,255,255,0.6)] transition-all duration-300">
+                <div className="relative w-full h-full px-8 py-3.5 xs:px-10 xs:py-4 sm:px-14 sm:py-4.5 md:px-16 md:py-5 bg-gradient-to-b from-[#ffffff] via-[#e5e7eb] to-[#c7cbd2] group-hover:from-[#ffffff] group-hover:via-[#edf0f4] group-hover:to-[#d2d6dd] [clip-path:polygon(12px_0,calc(100%-12px)_0,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0_calc(100%-12px),0_12px)] flex items-center justify-center overflow-hidden shadow-[inset_0_2.5px_0_rgba(255,255,255,1),inset_0_-3px_0_rgba(156,163,175,0.7),inset_0_0_14px_rgba(255,255,255,0.6)] transition-all duration-300">
 
-                  {/* Збільшений, чіткий темний шрифт */}
-                  <span className="font-mono text-sm sm:text-base md:text-[17px] tracking-[0.24em] uppercase font-black text-neutral-950 animate-text-wave-dark select-none drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
+                  {/* Ще більший, чіткий темний шрифт для мобілки та ПК */}
+                  <span className="font-mono text-[15.5px] xs:text-base sm:text-lg md:text-[19px] tracking-[0.16em] xs:tracking-[0.2em] sm:tracking-[0.24em] uppercase font-black text-neutral-950 animate-text-wave-dark select-none drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
                     ПЕРЕГЛЯНУТИ РОБОТИ
                   </span>
                 </div>
