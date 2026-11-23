@@ -71,9 +71,48 @@ function InteractiveSwapShowcase({
   const desktopImage = project.desktopImage;
   const mobileImage = project.mobileImage;
 
+  // Скидання положення скролу до початкового (хедер / початок сторінки)
+  const resetToInitialPosition = (device: "desktop" | "phone") => {
+    if (device === "desktop") {
+      bgDesktopOffsetRef.current = 0;
+      if (mobileDesktopForegroundRef.current) mobileDesktopForegroundRef.current.scrollTop = 0;
+      if (desktopMonitorForegroundRef.current) desktopMonitorForegroundRef.current.scrollTop = 0;
+      if (mobileDesktopBgRef.current) mobileDesktopBgRef.current.scrollTop = 0;
+      if (desktopMonitorBgRef.current) desktopMonitorBgRef.current.scrollTop = 0;
+    } else {
+      bgPhoneOffsetRef.current = 0;
+      if (mobilePhoneForegroundRef.current) mobilePhoneForegroundRef.current.scrollTop = 0;
+      if (desktopPhoneForegroundRef.current) desktopPhoneForegroundRef.current.scrollTop = 0;
+      if (mobilePhoneBgRef.current) mobilePhoneBgRef.current.scrollTop = 0;
+      if (desktopPhoneBgRef.current) desktopPhoneBgRef.current.scrollTop = 0;
+    }
+  };
+
   const swapDevice = (newDevice: "desktop" | "phone") => {
     setActiveDevice(newDevice);
+    resetToInitialPosition(newDevice);
+    requestAnimationFrame(() => {
+      resetToInitialPosition(newDevice);
+    });
   };
+
+  const handleDeviceClick = (targetDevice: "desktop" | "phone") => {
+    if (activeDevice !== targetDevice) {
+      swapDevice(targetDevice);
+    } else {
+      // Клік на вже активний девайс — миттєво повертає скріншот до початку
+      resetToInitialPosition(targetDevice);
+    }
+  };
+
+  // Гарантоване скидання скролу активного девайса до початку при будь-якому перемиканні
+  useEffect(() => {
+    resetToInitialPosition(activeDevice);
+    const rId = requestAnimationFrame(() => {
+      resetToInitialPosition(activeDevice);
+    });
+    return () => cancelAnimationFrame(rId);
+  }, [activeDevice]);
 
   // =============================================================
   // ЄДИНЕ ЗАЛІЗНЕ ПРАВИЛО:
@@ -148,9 +187,7 @@ function InteractiveSwapShowcase({
         
         {/* А) СМАРТФОН (на мобілці): */}
         <div
-          onClick={() => {
-            if (activeDevice !== "phone") swapDevice("phone");
-          }}
+          onClick={() => handleDeviceClick("phone")}
           className={`transition-all duration-500 ease-out flex flex-col ${
             activeDevice === "phone"
               ? "relative z-20 w-[min(225px,54vw)] h-[min(440px,62vh)] opacity-100 scale-100"
@@ -225,9 +262,7 @@ function InteractiveSwapShowcase({
 
         {/* Б) ДЕСКТОПНИЙ МОНІТОР (на мобілці): */}
         <div
-          onClick={() => {
-            if (activeDevice !== "desktop") swapDevice("desktop");
-          }}
+          onClick={() => handleDeviceClick("desktop")}
           className={`transition-all duration-500 ease-out flex flex-col items-center ${
             activeDevice === "desktop"
               ? "relative z-20 w-full opacity-100 scale-100"
@@ -348,13 +383,8 @@ function InteractiveSwapShowcase({
         <div className="relative w-full max-w-4xl flex flex-col items-center">
           
           {/* А) ДЕСКТОПНИЙ СТУДІЙНИЙ МОНІТОР: */}
-          {/* Монітор ЗАВЖДИ лишається по центру */}
-          {/* - activeDevice === "desktop": на передньому плані (z-20), 100% яскравість, СУТО РУЧНИЙ СКРОЛ */}
-          {/* - activeDevice === "phone": на задньому плані (z-10), злегка затемнений (70%), АВТО-СКРОЛ, клік повертає монітор! */}
           <div
-            onClick={() => {
-              if (activeDevice !== "desktop") swapDevice("desktop");
-            }}
+            onClick={() => handleDeviceClick("desktop")}
             className={`transition-all duration-500 ease-out flex flex-col items-center w-full ${
               activeDevice === "desktop"
                 ? "relative z-20 opacity-100 cursor-default"
@@ -441,12 +471,8 @@ function InteractiveSwapShowcase({
           </div>
 
           {/* Б) ДЕСКТОПНИЙ IPHONE: */}
-          {/* - activeDevice === "desktop": ХОВАЄТЬСЯ ЗА МОНІТОР (z-10), під нахилом, добре видно збоку, АВТО-СКРОЛИТЬСЯ */}
-          {/* - activeDevice === "phone": ВИХОДИТЬ НА ПЕРЕДНІЙ ПЛАН (z-30), збільшується на місці, вирівнюється, СУТО РУЧНИЙ СКРОЛ */}
           <div
-            onClick={() => {
-              if (activeDevice !== "phone") swapDevice("phone");
-            }}
+            onClick={() => handleDeviceClick("phone")}
             className={`transition-all duration-500 ease-out flex flex-col ${
               phonePosition === "top-left"
                 ? activeDevice === "phone"
