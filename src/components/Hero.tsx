@@ -159,7 +159,7 @@ export default function Hero() {
 
           {/* Заголовок (піднятий вище, органічно слідує за аватаром і статусом) */}
           <div className="w-full flex flex-col items-center mt-3 sm:mt-4 md:mt-5 px-2">
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white tracking-tight leading-[1.18] w-full text-center max-w-4xl">
+            <h1 className="font-heading text-[1.95rem] xs:text-[2.2rem] sm:text-4xl md:text-5xl lg:text-[3.6rem] font-extrabold text-white tracking-tight leading-[1.15] w-full text-center max-w-4xl">
               Розробка інтернет-магазинів та сайтів під ключ
             </h1>
           </div>
@@ -168,57 +168,57 @@ export default function Hero() {
         {/* 2. СЕРЕДНІЙ БЛОК: ОПИС (НА ОДНІЙ ВІДСТАНІ ПОСЕРЕДИНІ МІЖ ЗАГОЛОВКОМ ТА КНОПКОЮ) */}
         <div className="w-full flex-1 flex flex-col justify-center items-center my-auto py-2 sm:py-3">
           <div className="w-full flex flex-col items-start text-left max-w-4xl mx-auto pl-6 sm:pl-8 md:pl-0">
-            <div className="w-full space-y-3 sm:space-y-3 md:space-y-3.5">
+            <div className="w-full space-y-3.5 sm:space-y-3.5 md:space-y-4">
               {/* 1. Mobile First */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Smartphone className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Мобільна версія в пріоритеті</strong>
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <Smartphone className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
+                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-semibold">Мобільна версія в пріоритеті</strong>
                   <span className="hidden md:inline">: ідеальна зручність для покупців зі смартфонів.</span>
                 </p>
               </div>
 
               {/* 2. Жива демка онлайн */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Eye className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Живе демо під час роботи</strong>
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <Eye className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
+                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-semibold">Живе демо під час роботи</strong>
                   <span className="hidden md:inline">: бачите проєкт онлайн на кожному етапі та коригуєте в процесі.</span>
                 </p>
               </div>
 
               {/* 3. Без шаблонів */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Code2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Жодних шаблонів</strong>
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <Code2 className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
+                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-semibold">Жодних шаблонів</strong>
                   <span className="hidden md:inline">: індивідуальна розробка та чистий швидкий код під вашу справу.</span>
                 </p>
               </div>
 
               {/* 4. Адмінка та кабінети */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Sliders className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Адмін-панелі та кабінети</strong>
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <Sliders className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
+                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-semibold">Адмін-панелі та кабінети</strong>
                   <span className="hidden md:inline">: повне керування меню, цінами, доставкою та клієнтами.</span>
                 </p>
               </div>
 
               {/* 5. Telegram-бот бонусом */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Send className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Telegram-бот бонусом</strong>
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <Send className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
+                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-semibold">Telegram-бот бонусом</strong>
                   <span className="hidden md:inline">: налаштованого бота для миттєвих сповіщень про замовлення дарую в подарунок.</span>
                 </p>
               </div>
 
               {/* 6. Оплата в кінці */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <Banknote className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-neutral-400 shrink-0 mt-0.5" />
-                <p className="text-sm md:text-[15px] text-neutral-300 font-light leading-snug lg:whitespace-nowrap">
-                  <strong className="text-white font-medium">Оплата в кінці</strong>
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <Banknote className="w-5 h-5 sm:w-5 sm:h-5 text-neutral-300 shrink-0 mt-0.5" />
+                <p className="text-[16px] sm:text-[16.5px] md:text-[17px] text-neutral-200 leading-snug lg:whitespace-nowrap">
+                  <strong className="text-white font-semibold">Оплата в кінці</strong>
                   <span className="hidden md:inline">: розрахунок тільки після того, як ви особисто затвердите готову демку.</span>
                 </p>
               </div>
