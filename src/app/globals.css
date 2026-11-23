@@ -5,6 +5,11 @@
   --foreground: #ededed;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 @theme {
   /* Реєструємо класи, які будуть дивитися на CSS-змінні з layout.tsx */
   --font-heading: var(--font-jura);

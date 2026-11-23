@@ -101,8 +101,8 @@ export default function Hero() {
   const showBack = isFlipped;
 
   return (
-    <section className="relative min-h-dvh md:h-dvh md:max-h-dvh flex flex-col items-center bg-transparent px-4 sm:px-6 md:px-8 pt-6 pb-6 sm:pt-7 sm:pb-8 md:py-6 text-center overflow-hidden">
-      {/* ГОЛОВНИЙ ШИРОКОФОРМАТНИЙ КОНТЕНТ (РОЗПОДІЛЕНИЙ ПО ВИСОТІ ВІД ВЕРХУ ДО НИЗУ) */}
+    <section className="relative min-h-[100svh] md:h-dvh md:max-h-dvh flex flex-col items-center justify-between bg-transparent px-4 sm:px-6 md:px-8 pt-6 pb-6 sm:pt-7 sm:pb-8 md:py-6 text-center overflow-hidden [contain:content]">
+      {/* ГОЛОВНИЙ ШИРОКОФОРМАТНИЙ КОНТЕНТ (СТАБІЛЬНИЙ, БЕЗ СТРИБКІВ ПРИ СКРОЛІ) */}
       <div className="relative z-10 max-w-6xl mx-auto w-full flex-1 flex flex-col justify-between items-center">
 
         {/* 1. ВЕРХНІЙ БЛОК: 3D АВАТАР-МОНЕТКА, ПЛАШКА СТАТУСУ ТА ЗАГОЛОВОК (ПІДНЯТИЙ ВИЩЕ) */}
@@ -194,7 +194,7 @@ export default function Hero() {
         </div>
 
         {/* 2. СЕРЕДНІЙ БЛОК: ОПИС (НА ОДНІЙ ВІДСТАНІ ПОСЕРЕДИНІ МІЖ ЗАГОЛОВКОМ ТА КНОПКОЮ) */}
-        <div className="w-full flex-1 flex flex-col justify-center items-center my-auto py-2 sm:py-3">
+        <div className="w-full flex-1 flex flex-col justify-center items-center py-2 sm:py-3">
           <div className="w-full flex flex-col items-start text-left max-w-4xl mx-auto pl-6 sm:pl-8 md:pl-0">
             <div className="w-full space-y-3.5 sm:space-y-3.5 md:space-y-4">
               {/* 1. Mobile First */}

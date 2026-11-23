@@ -24,10 +24,18 @@ export default function DigitalRain() {
     let animationFrameId: number;
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let lastWidth = window.innerWidth;
 
     // Підтримка високої чіткості Retina/OLED для мобільних (DPI)
     const resizeCanvas = () => {
       if (!canvas) return;
+      // Ігноруємо коливання висоти через тулбари мобільних браузерів при скролі,
+      // перераховуємо тільки якщо реально змінилася ширина (поворот екрана / десктопний ресайз)
+      if (canvas.width > 0 && Math.abs(window.innerWidth - lastWidth) < 12) {
+        return;
+      }
+      lastWidth = window.innerWidth;
+
       const dpr = Math.min(window.devicePixelRatio || 1, 2); // Максимум 2 для балансу продуктивності та чіткості
       width = window.innerWidth;
       height = window.innerHeight;
