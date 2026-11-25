@@ -216,12 +216,12 @@ function InteractiveSwapShowcase({
             activeDevice === "phone"
               ? "relative z-20 w-[min(225px,54vw)] h-[min(440px,62vh)] opacity-100 scale-100"
               : phonePosition === "top-left" || phonePosition === "bottom-left"
-                ? `absolute -top-10 left-1 z-10 w-[min(145px,38vw)] h-[min(280px,40vh)] cursor-pointer hover:rotate-[-5deg] shadow-2xl active:scale-95 ${
+                ? `absolute -top-10 left-1 z-10 w-[min(145px,38vw)] h-[min(280px,40vh)] cursor-pointer hover:rotate-[-5deg] active:scale-95 ${
                     isPeeking
                       ? "rotate-[-4deg] -translate-x-2.5 -translate-y-2 scale-[1.04] opacity-100"
                       : "rotate-[-12deg] opacity-95"
                   }`
-                : `absolute -top-6 right-3 z-10 w-[min(140px,36vw)] h-[min(270px,38vh)] cursor-pointer hover:rotate-[2deg] shadow-2xl active:scale-95 ${
+                : `absolute -top-6 right-3 z-10 w-[min(140px,36vw)] h-[min(270px,38vh)] cursor-pointer hover:rotate-[2deg] active:scale-95 ${
                     isPeeking
                       ? "rotate-[1deg] translate-x-2.5 -translate-y-2 scale-[1.04] opacity-100"
                       : "rotate-[6deg] opacity-90"
@@ -233,7 +233,7 @@ function InteractiveSwapShowcase({
             className={`w-full h-full bg-gradient-to-b from-[#3a3d45] via-[#242730] to-[#14161c] border-2 border-[#4b5563] shadow-[0_25px_70px_rgba(0,0,0,0.98)] ring-1 ring-white/20 transition-all flex flex-col ${
               activeDevice === "phone"
                 ? "p-2 rounded-[38px]"
-                : "p-1.5 rounded-[28px] border-emerald-500/50 shadow-emerald-950/30"
+                : "p-1.5 rounded-[28px]"
             }`}
           >
             {/* Dynamic Island */}
@@ -299,12 +299,12 @@ function InteractiveSwapShowcase({
             activeDevice === "desktop"
               ? "relative z-20 w-full opacity-100 scale-100"
               : phonePosition === "top-left" || phonePosition === "bottom-left"
-                ? `absolute right-0 bottom-2 z-10 w-[min(150px,40vw)] cursor-pointer hover:rotate-0 hover:opacity-100 shadow-2xl active:scale-95 ${
+                ? `absolute right-0 bottom-2 z-10 w-[min(150px,40vw)] cursor-pointer hover:rotate-0 hover:opacity-100 active:scale-95 ${
                     isPeeking
                       ? "rotate-[-4deg] translate-x-2 -translate-y-3 scale-[1.06] opacity-100"
                       : "rotate-[3deg] opacity-85"
                   }`
-                : `absolute left-0 bottom-2 z-10 w-[min(150px,40vw)] cursor-pointer hover:rotate-0 hover:opacity-100 shadow-2xl active:scale-95 ${
+                : `absolute left-0 bottom-2 z-10 w-[min(150px,40vw)] cursor-pointer hover:rotate-0 hover:opacity-100 active:scale-95 ${
                     isPeeking
                       ? "rotate-[4deg] -translate-x-2 -translate-y-3 scale-[1.06] opacity-100"
                       : "rotate-[-3deg] opacity-85"
@@ -316,7 +316,7 @@ function InteractiveSwapShowcase({
             className={`w-full bg-gradient-to-b from-[#3a3d45] via-[#242730] to-[#1a1c23] border border-[#4b5563]/90 shadow-[0_30px_90px_rgba(0,0,0,0.95)] ring-1 ring-white/20 transition-all ${
               activeDevice === "desktop"
                 ? "p-2.5 sm:p-3 rounded-[24px]"
-                : "p-1.5 rounded-xl border-emerald-500/40"
+                : "p-1.5 rounded-xl"
             }`}
           >
             {/* Вічко камери */}
@@ -516,31 +516,31 @@ function InteractiveSwapShowcase({
             className={`transition-all duration-500 ease-out flex flex-col ${
               phonePosition === "top-left"
                 ? activeDevice === "phone"
-                  ? "z-30 absolute -top-4 md:-top-6 left-0 md:left-4 origin-top-left w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
-                  : `z-10 absolute -top-8 md:-top-12 -left-12 md:-left-20 lg:-left-26 origin-center w-[185px] md:w-[205px] h-[min(400px,46vh)] md:h-[min(430px,49vh)] hover:rotate-[-7deg] hover:-translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer shadow-2xl ${
+                  ? "z-30 absolute -top-4 md:-top-6 left-0 md:left-4 origin-top-left w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 cursor-default"
+                  : `z-10 absolute -top-8 md:-top-12 -left-12 md:-left-20 lg:-left-26 origin-center w-[185px] md:w-[205px] h-[min(400px,46vh)] md:h-[min(430px,49vh)] hover:rotate-[-7deg] hover:-translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer ${
                       isPeeking
                         ? "rotate-[-7deg] -translate-x-2.5 -translate-y-2 scale-[1.03] opacity-100"
                         : "rotate-[-14deg] opacity-95"
                     }`
                 : phonePosition === "bottom-left"
                   ? activeDevice === "phone"
-                    ? "z-30 absolute -bottom-4 left-0 md:left-4 origin-bottom-left w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
-                    : `z-10 absolute -bottom-5 -left-6 md:-left-12 origin-bottom-left w-[180px] md:w-[195px] h-[min(385px,44vh)] md:h-[min(415px,47vh)] hover:rotate-[-6deg] hover:-translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer shadow-2xl ${
+                    ? "z-30 absolute -bottom-4 left-0 md:left-4 origin-bottom-left w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 cursor-default"
+                    : `z-10 absolute -bottom-5 -left-6 md:-left-12 origin-bottom-left w-[180px] md:w-[195px] h-[min(385px,44vh)] md:h-[min(415px,47vh)] hover:rotate-[-6deg] hover:-translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer ${
                         isPeeking
                           ? "rotate-[-6deg] -translate-x-2.5 -translate-y-2 scale-[1.03] opacity-100"
                           : "rotate-[-12deg] opacity-95"
                       }`
                   : phonePosition === "top-right"
                     ? activeDevice === "phone"
-                      ? "z-30 absolute -top-4 md:-top-6 right-0 md:right-4 origin-top-right w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
-                      : `z-10 absolute -top-8 md:-top-12 -right-12 md:-right-20 lg:-right-26 origin-center w-[185px] md:w-[205px] h-[min(400px,46vh)] md:h-[min(430px,49vh)] hover:rotate-[7deg] hover:translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer shadow-2xl ${
+                      ? "z-30 absolute -top-4 md:-top-6 right-0 md:right-4 origin-top-right w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 cursor-default"
+                      : `z-10 absolute -top-8 md:-top-12 -right-12 md:-right-20 lg:-right-26 origin-center w-[185px] md:w-[205px] h-[min(400px,46vh)] md:h-[min(430px,49vh)] hover:rotate-[7deg] hover:translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer ${
                           isPeeking
                             ? "rotate-[7deg] translate-x-2.5 -translate-y-2 scale-[1.03] opacity-100"
                             : "rotate-[14deg] opacity-95"
                         }`
                     : activeDevice === "phone"
-                      ? "z-30 absolute -bottom-4 right-0 md:right-4 origin-bottom-right w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
-                      : `z-10 absolute -bottom-5 -right-6 md:-right-12 origin-bottom-right w-[180px] md:w-[195px] h-[min(385px,44vh)] md:h-[min(415px,47vh)] hover:rotate-[6deg] hover:translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer shadow-2xl ${
+                      ? "z-30 absolute -bottom-4 right-0 md:right-4 origin-bottom-right w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 cursor-default"
+                      : `z-10 absolute -bottom-5 -right-6 md:-right-12 origin-bottom-right w-[180px] md:w-[195px] h-[min(385px,44vh)] md:h-[min(415px,47vh)] hover:rotate-[6deg] hover:translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer ${
                           isPeeking
                             ? "rotate-[6deg] translate-x-2.5 -translate-y-2 scale-[1.03] opacity-100"
                             : "rotate-[12deg] opacity-95"
@@ -551,8 +551,8 @@ function InteractiveSwapShowcase({
             <div
               className={`w-full h-full bg-gradient-to-b from-[#3a3d45] via-[#242730] to-[#14161c] border-2 border-[#4b5563] ring-1 ring-white/20 transition-all flex flex-col ${
                 activeDevice === "phone"
-                  ? "p-2.5 rounded-[44px]"
-                  : "p-2 rounded-[38px]"
+                  ? "p-2.5 rounded-[44px] shadow-[0_35px_100px_rgba(0,0,0,0.98)]"
+                  : "p-2 rounded-[38px] shadow-2xl"
               }`}
             >
               {/* Dynamic Island */}
@@ -625,6 +625,7 @@ function InteractiveSwapShowcase({
 export default function Projects() {
   const flagship = projectsData.find((p) => p.id === "flagship-project");
   const lepoxy = projectsData.find((p) => p.id === "lepoxy-project");
+  const geniusLand = projectsData.find((p) => p.id === "genius-land");
   const tanya = projectsData.find((p) => p.id === "tanya-zaiets");
   const thiamis = projectsData.find((p) => p.id === "thiamis-cleaning");
   const SHOW_CLEANING = false; // Тимчасово приховано за запитом
@@ -632,6 +633,7 @@ export default function Projects() {
   const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({
     "flagship-project": false,
     "lepoxy-project": false,
+    "genius-land": false,
     "tanya-zaiets": false,
     "thiamis-cleaning": false,
   });
@@ -932,7 +934,148 @@ export default function Projects() {
           </div>
         )}
 
-        {/* 3. ТРЕТІЙ ПРОЄКТ: ПРАКТИЧНИЙ ПОСІБНИК (ТЕТЯНА ЗАЄЦЬ) */}
+        {/* 3. ТРЕТІЙ ПРОЄКТ: GENIUSLAND (ШКОЛА РОЗВИТКУ ДІТЕЙ) */}
+        {geniusLand && (
+          <div className="space-y-8 md:space-y-10 pt-10">
+            {/* Заголовок над мокапом */}
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
+                Онлайн-школа розвитку <span className="text-neutral-500 font-normal text-2xl sm:text-3xl md:text-4xl">(GeniusLand)</span>
+              </h2>
+            </div>
+
+            {/* А) ДВОСТОРОННІЙ ІНТЕРАКТИВНИЙ СВАП МОКАП (ТЕЛЕФОН ЗВЕРХУ ПРАВОРУЧ) */}
+            <div className="w-full pt-6 md:pt-12">
+              <InteractiveSwapShowcase project={geniusLand} phonePosition="top-right" />
+            </div>
+
+            {/* Кнопка розгортання / згортання опису (ТІЛЬКИ ДЛЯ МОБІЛКИ — СТИЛЬ СТЕЛС-ПЛАШКИ) */}
+            <div className="flex flex-col items-center pt-2 lg:hidden">
+              <button
+                type="button"
+                onClick={() => toggleProject("genius-land")}
+                className="group relative inline-flex p-[1px] pb-[2.5px] bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 hover:from-neutral-400 hover:via-neutral-600 hover:to-neutral-900 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] cursor-pointer select-none active:translate-y-[1.5px] active:pb-[1px] transition-all"
+              >
+                <div className="relative px-3.5 py-1 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] group-hover:from-[#232733] group-hover:via-[#161822] group-hover:to-[#0c0d12] [clip-path:polygon(6px_0,calc(100%-6px)_0,100%_6px,100%_calc(100%-6px),calc(100%-6px)_100%,6px_100%,0_calc(100%-6px),0_6px)] flex items-center gap-2 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.85)] transition-colors">
+                  <span className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                    expandedProjects["genius-land"] ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" : "bg-neutral-400 shadow-[0_0_6px_rgba(255,255,255,0.4)]"
+                  }`} />
+                  <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider uppercase font-medium text-neutral-300 group-hover:text-white transition-colors">
+                    {expandedProjects["genius-land"]
+                      ? "Згорнути опис та деталі"
+                      : "Деталі проєкту та архітектура"}
+                  </span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                      expandedProjects["genius-land"] ? "rotate-180 text-emerald-400" : ""
+                    }`}
+                  />
+                </div>
+              </button>
+            </div>
+
+            {/* Б) ДЕТАЛЬНИЙ ОПИС ТА АРХІТЕКТУРНІ ОСОБЛИВОСТІ: на ПК видно завжди, на мобілці розгортається */}
+            <div
+              className={`${
+                expandedProjects["genius-land"] ? "grid" : "hidden"
+              } lg:grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-6 border-t border-neutral-900`}
+            >
+              
+              {/* Ліва колонка: Плашка та опис */}
+              <div className="lg:col-span-5 space-y-4">
+                <div className="flex justify-center">
+                  <div className="relative inline-flex p-[1px] pb-[2.5px] bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] select-none">
+                    <div className="relative px-3.5 py-1 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] [clip-path:polygon(6px_0,calc(100%-6px)_0,100%_6px,100%_calc(100%-6px),calc(100%-6px)_100%,6px_100%,0_calc(100%-6px),0_6px)] flex items-center gap-2 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.85)]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
+                      <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider uppercase font-medium text-neutral-300">
+                        EdTech &amp; Admin Panel
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-neutral-300 text-base md:text-lg leading-relaxed font-light">
+                  {geniusLand.description}
+                </p>
+              </div>
+
+              {/* Права колонка: Архітектурні можливості */}
+              <div className="lg:col-span-7 space-y-6">
+                <div className="flex justify-center">
+                  <div className="relative inline-flex p-[1px] pb-[2.5px] bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 [clip-path:polygon(7px_0,calc(100%-7px)_0,100%_7px,100%_calc(100%-7px),calc(100%-7px)_100%,7px_100%,0_calc(100%-7px),0_7px)] shadow-[0_6px_16px_rgba(0,0,0,0.9)] select-none">
+                    <div className="relative px-3.5 py-1 bg-gradient-to-b from-[#1c1f28] via-[#12141c] to-[#0a0b10] [clip-path:polygon(6px_0,calc(100%-6px)_0,100%_6px,100%_calc(100%-6px),calc(100%-6px)_100%,6px_100%,0_calc(100%-6px),0_6px)] flex items-center gap-2 overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.85)]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
+                      <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider uppercase font-medium text-neutral-300">
+                        Архітектурні особливості та можливості
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  {/* 1. Адмін-панель */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2.5 text-neutral-200 font-medium text-sm md:text-base">
+                      <Sliders className="w-4 h-4 text-neutral-400 shrink-0" />
+                      <h4>Повноцінна адмін-панель керування школою</h4>
+                    </div>
+                    <p className="text-neutral-400 text-xs md:text-sm leading-relaxed font-light pl-6.5">
+                      Зручний кабінет адміністратора дозволяє в кілька кліків додавати акційні пропозиції, створювати або оновлювати навчальні напрямки, змінювати ціни та оперативно обробляти заявки від батьків.
+                    </p>
+                  </div>
+
+                  {/* 2. Каталог напрямків */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2.5 text-neutral-200 font-medium text-sm md:text-base">
+                      <Layers className="w-4 h-4 text-neutral-400 shrink-0" />
+                      <h4>Структурований каталог курсів та напрямків</h4>
+                    </div>
+                    <p className="text-neutral-400 text-xs md:text-sm leading-relaxed font-light pl-6.5">
+                      Чітка презентація програм (підготовка до школи, англійська, швидкочитання, ментальна арифметика, логопед, репетиторство) із віковими маркерами, тривалістю та детальним описом кожного курсу.
+                    </p>
+                  </div>
+
+                  {/* 3. Гнучка тарифна сітка */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2.5 text-neutral-200 font-medium text-sm md:text-base">
+                      <SlidersHorizontal className="w-4 h-4 text-neutral-400 shrink-0" />
+                      <h4>Перемикач тарифів «Групові / Індивідуальні» &amp; Акції</h4>
+                    </div>
+                    <p className="text-neutral-400 text-xs md:text-sm leading-relaxed font-light pl-6.5">
+                      Інтерактивний блок вартості з миттєвим перемиканням формату занять та динамічний слайдер спецпропозицій («Перший урок FREE») на першому екрані для максимальної конверсії.
+                    </p>
+                  </div>
+
+                  {/* 4. Викладачі та довіра */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2.5 text-neutral-200 font-medium text-sm md:text-base">
+                      <Users className="w-4 h-4 text-neutral-400 shrink-0" />
+                      <h4>Викладацький склад, галерея та відгуки батьків</h4>
+                    </div>
+                    <p className="text-neutral-400 text-xs md:text-sm leading-relaxed font-light pl-6.5">
+                      Персональні картки педагогів із досвідом, фотогалерея живих занять школи та слайдер реальних відгуків батьків формують високу довіру ще до першого дзвінка.
+                    </p>
+                  </div>
+
+                  {/* 5. Запис на пробний урок */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2.5 text-neutral-200 font-medium text-sm md:text-base">
+                      <CheckCircle2 className="w-4 h-4 text-neutral-400 shrink-0" />
+                      <h4>Швидкий запис дитини на безкоштовне пробне заняття</h4>
+                    </div>
+                    <p className="text-neutral-400 text-xs md:text-sm leading-relaxed font-light pl-6.5">
+                      Продумана форма заявки з вибором напрямку автоматично передає контакти в адмін-панель для швидкого зв&apos;язку та призначення часу уроку.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        )}
+
+        {/* 4. ЧЕТВЕРТИЙ ПРОЄКТ: ПРАКТИЧНИЙ ПОСІБНИК (ТЕТЯНА ЗАЄЦЬ) */}
         {tanya && (
           <div className="space-y-8 md:space-y-10 pt-10">
             {/* Заголовок над мокапом */}

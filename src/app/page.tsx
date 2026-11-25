@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import WorkStages from "@/components/WorkStages";
 import AboutMe from "@/components/AboutMe";
+import ProjectCalculatorCTA from "@/components/ProjectCalculatorCTA";
 import Footer from "@/components/Footer";
 import StickyTelegram from "@/components/StickyTelegram";
 import DigitalRain from "@/components/DigitalRain";
@@ -23,6 +24,9 @@ export default function Home() {
 
       {/* Блок "Про мене" */}
       <AboutMe />
+
+      {/* Інтерактивний калькулятор та фінальний CTA перед футером */}
+      <ProjectCalculatorCTA />
 
       {/* Футер */}
       <Footer />

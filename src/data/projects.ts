@@ -60,10 +60,32 @@ export const projectsData: Project[] = [
     ],
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Interactive UI", "Custom Configurator"],
     demoUrl: "https://www.lepoxy-atelier.com/",
-    desktopImage: "/projects/lepoxy-full.webp",
-    mobileImage: "/projects/lepoxy-mobile-full.webp",
+    desktopImage: "/projects/lepoxy-full.png",
+    mobileImage: "/projects/lepoxy-mobile-full.png",
     screens: [
-      { label: "Повна сторінка (Скрол)", image: "/projects/lepoxy-full.webp" },
+      { label: "Повна сторінка (Скрол)", image: "/projects/lepoxy-full.png" },
+    ],
+  },
+  {
+    id: "genius-land",
+    title: "GeniusLand — Онлайн-школа розвитку для дітей",
+    category: "featured",
+    badge: "🎓 EdTech / Онлайн-школа & Адмін-панель",
+    description:
+      "Сучасна освітня платформа для школи розвитку дітей GeniusLand (онлайн-навчання + живі заняття у м. Хотин). Побудована з акцентом на легке сприйняття батьками: каталог навчальних напрямків, гнучкий перемикач групових та індивідуальних тарифів, знайомство з викладачами та власна адмін-панель для керування акціями, курсами, цінами й заявками.",
+    highlights: [
+      "Власна адмін-панель: керування акціями, напрямками, цінами та обробка заявок",
+      "Каталог напрямків (підготовка до школи, англійська, ментальна арифметика, логопед)",
+      "Інтерактивний перемикач вартості: «Групові / Індивідуальні» заняття",
+      "Слайдер гарячих пропозицій («Перший урок FREE») та форма запису дитини",
+      "Блок викладацького складу, фотогалерея життя школи та відгуки батьків",
+    ],
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Admin Panel", "EdTech"],
+    demoUrl: "https://www.genius-land.com.ua/",
+    desktopImage: "/projects/www.genius-land.com.ua_.png",
+    mobileImage: "/projects/www.genius-land.com.ua_(iPhone 16 Pro Max).png",
+    screens: [
+      { label: "Повна сторінка (Скрол)", image: "/projects/www.genius-land.com.ua_.png" },
     ],
   },
   {
