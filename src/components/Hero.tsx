@@ -47,22 +47,38 @@ export default function Hero() {
 
   // Завжди відкривати верх сайту при оновленні сторінки або повторному відкритті
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if ("scrollRestoration" in window.history) {
-        window.history.scrollRestoration = "manual";
-      }
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      });
+    if (typeof window === "undefined") return;
 
-      const handlePageShow = () => {
-        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-      };
-
-      window.addEventListener("pageshow", handlePageShow);
-      return () => window.removeEventListener("pageshow", handlePageShow);
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
     }
+
+    // Якщо в URL залишився якір (#projects тощо), прибираємо його без перезавантаження
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
+    const scrollTopInstant = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    };
+
+    scrollTopInstant();
+    requestAnimationFrame(scrollTopInstant);
+    // Додаткові страхові скидання для iOS Safari, який може відновлювати скрол із затримкою після рендеру
+    const t1 = setTimeout(scrollTopInstant, 50);
+    const t2 = setTimeout(scrollTopInstant, 180);
+
+    window.addEventListener("pageshow", scrollTopInstant);
+    window.addEventListener("load", scrollTopInstant);
+    window.addEventListener("beforeunload", scrollTopInstant);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener("pageshow", scrollTopInstant);
+      window.removeEventListener("load", scrollTopInstant);
+      window.removeEventListener("beforeunload", scrollTopInstant);
+    };
   }, []);
 
   // Автоматичне періодичне перевертання монетки з паузою для читання
@@ -144,9 +160,9 @@ export default function Hero() {
   const showBack = isFlipped;
 
   return (
-    <section className="relative min-h-[100svh] md:h-dvh md:max-h-dvh flex flex-col items-center justify-between bg-transparent px-4 sm:px-6 md:px-8 pt-[max(1.25rem,calc(env(safe-area-inset-top,0px)+0.75rem))] pb-[max(0.75rem,calc(env(safe-area-inset-bottom,0px)+0.5rem))] sm:pt-[max(1.5rem,calc(env(safe-area-inset-top,0px)+1rem))] sm:pb-4 md:py-6 text-center overflow-hidden [contain:content]">
+    <section className="relative min-h-[100svh] md:h-dvh md:max-h-dvh flex flex-col items-center justify-between bg-transparent px-4 sm:px-6 md:px-8 pt-[max(1.25rem,env(safe-area-inset-top,0px))] pb-3 sm:pt-[max(1.5rem,env(safe-area-inset-top,0px))] sm:pb-4 md:py-6 text-center overflow-hidden [contain:content]">
       {/* ОНЛАЙН ГОДИННИК У ВЕРХНЬОМУ ЛІВОМУ КУТКУ: НАПІВПРОЗОРИЙ 3D ТЕКСТ (БЕЗ ПЛАШКИ) */}
-      <div className="absolute top-[max(1rem,calc(env(safe-area-inset-top,0px)+0.5rem))] left-4 sm:top-6 sm:left-7 z-20 pointer-events-none select-none flex items-center gap-2">
+      <div className="absolute top-[max(1rem,env(safe-area-inset-top,0px))] left-4 sm:top-6 sm:left-7 z-20 pointer-events-none select-none flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 shadow-[0_0_8px_rgba(52,211,153,0.8),0_1px_2px_rgba(0,0,0,0.9)] animate-pulse" />
         <span
           className="font-mono text-[11px] sm:text-[12px] tracking-widest uppercase font-semibold text-neutral-300/70"
@@ -330,6 +346,10 @@ export default function Hero() {
 
             <a
               href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="relative inline-flex p-[2px] pb-[5px] sm:pb-[6px] bg-gradient-to-b from-[#e5e7eb] via-[#6b7280] to-[#1f2937] hover:from-white hover:via-[#9ca3af] hover:to-[#374151] [clip-path:polygon(14px_0,calc(100%-14px)_0,100%_14px,100%_calc(100%-14px),calc(100%-14px)_100%,14px_100%,0_calc(100%-14px),0_14px)] transition-all duration-300 hover:drop-shadow-[0_10px_28px_rgba(255,255,255,0.28)] cursor-pointer select-none active:translate-y-[3px] active:pb-[2px] animate-float drop-shadow-[0_8px_0_#111318,0_16px_32px_rgba(0,0,0,0.95)]"
             >
               {/* Внутрішня лицьова 3D-грань кнопки (масивне світле срібло з фаскою) */}
