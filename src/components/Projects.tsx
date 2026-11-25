@@ -45,12 +45,36 @@ function InteractiveSwapShowcase({
 
   // Стан фокусу: "desktop" або "phone"
   const [activeDevice, setActiveDevice] = useState<"desktop" | "phone">("desktop");
+  // Стан періодичного "виглядання" фонового девайса (точно як при наведенні миші)
+  const [isPeeking, setIsPeeking] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.innerWidth < 768) {
       setActiveDevice("phone");
     }
   }, []);
+
+  // Таймер періодичного "виглядання" для фонового девайса (кожні 3.8 сек визирає на 950 мс)
+  useEffect(() => {
+    let hideTimeout: ReturnType<typeof setTimeout>;
+
+    const triggerPeek = () => {
+      setIsPeeking(true);
+      hideTimeout = setTimeout(() => {
+        setIsPeeking(false);
+      }, 950);
+    };
+
+    // Перший поштовх через 2 секунди після появи, далі кожні 4 секунди
+    const startDelay = setTimeout(triggerPeek, 2000);
+    const interval = setInterval(triggerPeek, 4000);
+
+    return () => {
+      clearTimeout(startDelay);
+      clearInterval(interval);
+      clearTimeout(hideTimeout);
+    };
+  }, [activeDevice]);
 
   // Накопичувачі субпіксельних зміщень для ідеально плавної автопрокрутки (60-120 fps)
   const bgDesktopOffsetRef = useRef(0);
@@ -192,8 +216,16 @@ function InteractiveSwapShowcase({
             activeDevice === "phone"
               ? "relative z-20 w-[min(225px,54vw)] h-[min(440px,62vh)] opacity-100 scale-100"
               : phonePosition === "top-left" || phonePosition === "bottom-left"
-                ? "absolute -top-10 left-1 z-10 w-[min(145px,38vw)] h-[min(280px,40vh)] opacity-95 cursor-pointer rotate-[-12deg] hover:rotate-[-8deg] shadow-2xl active:scale-95"
-                : "absolute -top-6 right-3 z-10 w-[min(140px,36vw)] h-[min(270px,38vh)] opacity-90 cursor-pointer rotate-[6deg] hover:rotate-[3deg] shadow-2xl active:scale-95"
+                ? `absolute -top-10 left-1 z-10 w-[min(145px,38vw)] h-[min(280px,40vh)] cursor-pointer hover:rotate-[-5deg] shadow-2xl active:scale-95 ${
+                    isPeeking
+                      ? "rotate-[-4deg] -translate-x-2.5 -translate-y-2 scale-[1.04] opacity-100"
+                      : "rotate-[-12deg] opacity-95"
+                  }`
+                : `absolute -top-6 right-3 z-10 w-[min(140px,36vw)] h-[min(270px,38vh)] cursor-pointer hover:rotate-[2deg] shadow-2xl active:scale-95 ${
+                    isPeeking
+                      ? "rotate-[1deg] translate-x-2.5 -translate-y-2 scale-[1.04] opacity-100"
+                      : "rotate-[6deg] opacity-90"
+                  }`
           }`}
         >
           {/* Корпус смартфона */}
@@ -267,8 +299,16 @@ function InteractiveSwapShowcase({
             activeDevice === "desktop"
               ? "relative z-20 w-full opacity-100 scale-100"
               : phonePosition === "top-left" || phonePosition === "bottom-left"
-                ? "absolute right-0 bottom-2 z-10 w-[min(150px,40vw)] opacity-85 cursor-pointer rotate-[3deg] hover:rotate-0 hover:opacity-100 shadow-2xl active:scale-95"
-                : "absolute left-0 bottom-2 z-10 w-[min(150px,40vw)] opacity-85 cursor-pointer rotate-[-3deg] hover:rotate-0 hover:opacity-100 shadow-2xl active:scale-95"
+                ? `absolute right-0 bottom-2 z-10 w-[min(150px,40vw)] cursor-pointer hover:rotate-0 hover:opacity-100 shadow-2xl active:scale-95 ${
+                    isPeeking
+                      ? "rotate-[-4deg] translate-x-2 -translate-y-3 scale-[1.06] opacity-100"
+                      : "rotate-[3deg] opacity-85"
+                  }`
+                : `absolute left-0 bottom-2 z-10 w-[min(150px,40vw)] cursor-pointer hover:rotate-0 hover:opacity-100 shadow-2xl active:scale-95 ${
+                    isPeeking
+                      ? "rotate-[4deg] -translate-x-2 -translate-y-3 scale-[1.06] opacity-100"
+                      : "rotate-[-3deg] opacity-85"
+                  }`
           }`}
         >
           {/* Корпус монітора */}
@@ -477,18 +517,34 @@ function InteractiveSwapShowcase({
               phonePosition === "top-left"
                 ? activeDevice === "phone"
                   ? "z-30 absolute -top-4 md:-top-6 left-0 md:left-4 origin-top-left w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
-                  : "z-10 absolute -top-8 md:-top-12 -left-12 md:-left-20 lg:-left-26 origin-center w-[185px] md:w-[205px] h-[min(400px,46vh)] md:h-[min(430px,49vh)] rotate-[-14deg] hover:rotate-[-9deg] opacity-95 hover:opacity-100 cursor-pointer shadow-2xl"
+                  : `z-10 absolute -top-8 md:-top-12 -left-12 md:-left-20 lg:-left-26 origin-center w-[185px] md:w-[205px] h-[min(400px,46vh)] md:h-[min(430px,49vh)] hover:rotate-[-7deg] hover:-translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer shadow-2xl ${
+                      isPeeking
+                        ? "rotate-[-7deg] -translate-x-2.5 -translate-y-2 scale-[1.03] opacity-100"
+                        : "rotate-[-14deg] opacity-95"
+                    }`
                 : phonePosition === "bottom-left"
                   ? activeDevice === "phone"
                     ? "z-30 absolute -bottom-4 left-0 md:left-4 origin-bottom-left w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
-                    : "z-10 absolute -bottom-5 -left-6 md:-left-12 origin-bottom-left w-[180px] md:w-[195px] h-[min(385px,44vh)] md:h-[min(415px,47vh)] rotate-[-12deg] hover:rotate-[-8deg] opacity-95 hover:opacity-100 cursor-pointer shadow-2xl"
-                : phonePosition === "top-right"
-                  ? activeDevice === "phone"
-                    ? "z-30 absolute -top-4 md:-top-6 right-0 md:right-4 origin-top-right w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
-                    : "z-10 absolute -top-8 md:-top-12 -right-12 md:-right-20 lg:-right-26 origin-center w-[185px] md:w-[205px] h-[min(400px,46vh)] md:h-[min(430px,49vh)] rotate-[14deg] hover:rotate-[9deg] opacity-95 hover:opacity-100 cursor-pointer shadow-2xl"
-                  : activeDevice === "phone"
-                    ? "z-30 absolute -bottom-4 right-0 md:right-4 origin-bottom-right w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
-                    : "z-10 absolute -bottom-5 -right-6 md:-right-12 origin-bottom-right w-[180px] md:w-[195px] h-[min(385px,44vh)] md:h-[min(415px,47vh)] rotate-[12deg] hover:rotate-[8deg] opacity-95 hover:opacity-100 cursor-pointer shadow-2xl"
+                    : `z-10 absolute -bottom-5 -left-6 md:-left-12 origin-bottom-left w-[180px] md:w-[195px] h-[min(385px,44vh)] md:h-[min(415px,47vh)] hover:rotate-[-6deg] hover:-translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer shadow-2xl ${
+                        isPeeking
+                          ? "rotate-[-6deg] -translate-x-2.5 -translate-y-2 scale-[1.03] opacity-100"
+                          : "rotate-[-12deg] opacity-95"
+                      }`
+                  : phonePosition === "top-right"
+                    ? activeDevice === "phone"
+                      ? "z-30 absolute -top-4 md:-top-6 right-0 md:right-4 origin-top-right w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
+                      : `z-10 absolute -top-8 md:-top-12 -right-12 md:-right-20 lg:-right-26 origin-center w-[185px] md:w-[205px] h-[min(400px,46vh)] md:h-[min(430px,49vh)] hover:rotate-[7deg] hover:translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer shadow-2xl ${
+                          isPeeking
+                            ? "rotate-[7deg] translate-x-2.5 -translate-y-2 scale-[1.03] opacity-100"
+                            : "rotate-[14deg] opacity-95"
+                        }`
+                    : activeDevice === "phone"
+                      ? "z-30 absolute -bottom-4 right-0 md:right-4 origin-bottom-right w-[240px] md:w-[255px] h-[min(510px,58vh)] md:h-[min(540px,61vh)] rotate-0 opacity-100 shadow-[0_35px_100px_rgba(0,0,0,0.98)] cursor-default"
+                      : `z-10 absolute -bottom-5 -right-6 md:-right-12 origin-bottom-right w-[180px] md:w-[195px] h-[min(385px,44vh)] md:h-[min(415px,47vh)] hover:rotate-[6deg] hover:translate-x-2 hover:-translate-y-1.5 hover:opacity-100 cursor-pointer shadow-2xl ${
+                          isPeeking
+                            ? "rotate-[6deg] translate-x-2.5 -translate-y-2 scale-[1.03] opacity-100"
+                            : "rotate-[12deg] opacity-95"
+                        }`
             }`}
           >
             {/* Корпус iPhone */}

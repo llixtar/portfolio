@@ -144,9 +144,9 @@ export default function Hero() {
   const showBack = isFlipped;
 
   return (
-    <section className="relative min-h-[100svh] md:h-dvh md:max-h-dvh flex flex-col items-center justify-between bg-transparent px-4 sm:px-6 md:px-8 pt-5 pb-3 sm:pt-6 sm:pb-4 md:py-6 text-center overflow-hidden [contain:content]">
+    <section className="relative min-h-[100svh] md:h-dvh md:max-h-dvh flex flex-col items-center justify-between bg-transparent px-4 sm:px-6 md:px-8 pt-[max(1.25rem,calc(env(safe-area-inset-top,0px)+0.75rem))] pb-[max(0.75rem,calc(env(safe-area-inset-bottom,0px)+0.5rem))] sm:pt-[max(1.5rem,calc(env(safe-area-inset-top,0px)+1rem))] sm:pb-4 md:py-6 text-center overflow-hidden [contain:content]">
       {/* ОНЛАЙН ГОДИННИК У ВЕРХНЬОМУ ЛІВОМУ КУТКУ: НАПІВПРОЗОРИЙ 3D ТЕКСТ (БЕЗ ПЛАШКИ) */}
-      <div className="absolute top-4 left-4 sm:top-6 sm:left-7 z-20 pointer-events-none select-none flex items-center gap-2">
+      <div className="absolute top-[max(1rem,calc(env(safe-area-inset-top,0px)+0.5rem))] left-4 sm:top-6 sm:left-7 z-20 pointer-events-none select-none flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 shadow-[0_0_8px_rgba(52,211,153,0.8),0_1px_2px_rgba(0,0,0,0.9)] animate-pulse" />
         <span
           className="font-mono text-[11px] sm:text-[12px] tracking-widest uppercase font-semibold text-neutral-300/70"

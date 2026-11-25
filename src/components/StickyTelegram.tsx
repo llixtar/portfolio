@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Send, MessageCircle, X, ChevronDown, HelpCircle } from "lucide-react";
+import { Send, MessageCircle, MessageCircleQuestion, X, ChevronDown, HelpCircle } from "lucide-react";
 
 export default function StickyTelegram() {
   const [isVisible, setIsVisible] = useState(false);
@@ -228,7 +228,7 @@ export default function StickyTelegram() {
         >
           {/* Внутрішня чаша кнопки */}
           <div className="relative w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-gradient-to-b from-[#1b2533] via-[#0e1622] to-[#070c13] flex items-center justify-center overflow-hidden shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),inset_0_-2px_4px_rgba(0,0,0,0.9)] group-hover:from-[#233144] transition-colors">
-            <Send className="w-5 h-5 text-sky-400 group-hover:text-white -translate-x-0.5 translate-y-0.5 transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <MessageCircleQuestion className="w-5 h-5 text-sky-400 group-hover:text-white transition-all duration-300 group-hover:scale-110" />
           </div>
         </button>
 

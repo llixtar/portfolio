@@ -46,17 +46,32 @@ export default function AboutMe() {
         {/* 3 ОСНОВНІ КАРТКИ ПІДХОДУ: ВІЯЛО НА ДЕСКТОПІ / APPLE WALLET СТЕК НА МОБІЛЦІ */}
         <div className="relative pt-4 pb-8 lg:py-6">
 
-          {/* МОБІЛЬНИЙ СТЕК (APPLE WALLET КАСКАД) — показується на екранах < lg */}
-          <div className="flex flex-col -space-y-20 sm:-space-y-24 lg:hidden max-w-md mx-auto">
+          {/* МОБІЛЬНИЙ СТЕК (APPLE WALLET КАСКАД З РОЗШТОВХУВАННЯМ СУСІДНІХ КАРТОК) — показується на екранах < lg */}
+          <div className="flex flex-col lg:hidden max-w-md mx-auto">
             {cards.map((card, idx) => {
               const isSelected = activeCard === idx;
+              const isNextAfterSelected = activeCard !== null && idx === activeCard + 1;
+
+              const stackMarginClass =
+                idx === 0
+                  ? "mt-0"
+                  : isNextAfterSelected
+                  ? "mt-4 sm:mt-5"
+                  : isSelected
+                  ? "-mt-8 sm:-mt-10"
+                  : "-mt-20 sm:-mt-24";
+
               return (
                 <div
                   key={idx}
                   onClick={() => setActiveCard(isSelected ? null : idx)}
                   style={{ zIndex: isSelected ? 30 : idx + 1 }}
-                  className={`relative cursor-pointer transition-all duration-300 transform select-none ${
-                    isSelected ? "-translate-y-8 scale-[1.02] shadow-[0_25px_50px_rgba(0,0,0,0.95)]" : "shadow-[0_12px_28px_rgba(0,0,0,0.85)]"
+                  className={`relative cursor-pointer transition-all duration-400 ease-out transform select-none ${stackMarginClass} ${
+                    isSelected
+                      ? "scale-[1.03] shadow-[0_28px_60px_rgba(0,0,0,0.95),0_0_25px_rgba(255,255,255,0.06)]"
+                      : activeCard !== null
+                      ? "scale-[0.98] opacity-90 shadow-[0_12px_28px_rgba(0,0,0,0.85)]"
+                      : "shadow-[0_12px_28px_rgba(0,0,0,0.85)]"
                   }`}
                 >
                   <div className="p-[1px] pb-[3px] bg-gradient-to-b from-neutral-500 via-neutral-700 to-neutral-950 rounded-2xl [clip-path:polygon(14px_0,calc(100%-14px)_0,100%_14px,100%_calc(100%-14px),calc(100%-14px)_100%,14px_100%,0_calc(100%-14px),0_14px)]">
@@ -78,14 +93,9 @@ export default function AboutMe() {
                       </p>
 
                       {/* Нижня лінія статусу */}
-                      <div className="pt-2.5 border-t border-neutral-800/80 flex items-center justify-between text-[11px] font-mono text-neutral-400">
-                        <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-                          <span>{card.status}</span>
-                        </div>
-                        <span className="text-[10px] text-neutral-500">
-                          {isSelected ? "Торкніться згорнути" : "Торкніться для фокусу"}
-                        </span>
+                      <div className="pt-2.5 border-t border-neutral-800/80 flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+                        <span>{card.status}</span>
                       </div>
 
                     </div>
