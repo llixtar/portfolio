@@ -50,7 +50,8 @@ export default function StickyTelegram() {
       document.getElementById("calculator-content") ??
       document.getElementById("calculator");
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const top = el.getBoundingClientRect().top + window.scrollY - 24;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
 

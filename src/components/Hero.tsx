@@ -348,7 +348,13 @@ export default function Hero() {
               href="#projects"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                const el =
+                  document.getElementById("projects-content") ??
+                  document.getElementById("projects");
+                if (el) {
+                  const top = el.getBoundingClientRect().top + window.scrollY - 24;
+                  window.scrollTo({ top, behavior: "smooth" });
+                }
               }}
               className="relative inline-flex p-[2px] pb-[5px] sm:pb-[6px] bg-gradient-to-b from-[#e5e7eb] via-[#6b7280] to-[#1f2937] hover:from-white hover:via-[#9ca3af] hover:to-[#374151] [clip-path:polygon(14px_0,calc(100%-14px)_0,100%_14px,100%_calc(100%-14px),calc(100%-14px)_100%,14px_100%,0_calc(100%-14px),0_14px)] transition-all duration-300 hover:drop-shadow-[0_10px_28px_rgba(255,255,255,0.28)] cursor-pointer select-none active:translate-y-[3px] active:pb-[2px] animate-float drop-shadow-[0_8px_0_#111318,0_16px_32px_rgba(0,0,0,0.95)]"
             >

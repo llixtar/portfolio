@@ -440,7 +440,13 @@ export default function ProjectCalculatorCTA() {
               href="#projects"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                const el =
+                  document.getElementById("projects-content") ??
+                  document.getElementById("projects");
+                if (el) {
+                  const top = el.getBoundingClientRect().top + window.scrollY - 24;
+                  window.scrollTo({ top, behavior: "smooth" });
+                }
               }}
               className="group relative inline-flex p-[1.5px] pb-[3px] bg-gradient-to-b from-neutral-400 via-neutral-600 to-neutral-950 hover:from-neutral-300 hover:via-neutral-500 hover:to-neutral-900 [clip-path:polygon(10px_0,calc(100%-10px)_0,100%_10px,100%_calc(100%-10px),calc(100%-10px)_100%,10px_100%,0_calc(100%-10px),0_10px)] shadow-[0_10px_25px_rgba(0,0,0,0.9)] active:translate-y-[1.5px] active:pb-[1.5px] transition-all select-none cursor-pointer"
             >

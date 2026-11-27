@@ -663,7 +663,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="relative py-28 px-4 bg-transparent overflow-hidden">
-      <div className="relative z-10 max-w-6xl mx-auto space-y-24">
+      <div id="projects-content" className="relative z-10 max-w-6xl mx-auto space-y-24">
         
         {/* 1. ФЛАГМАНСЬКИЙ ПРОЄКТ (ІНТЕРАКТИВНИЙ SWAP МОКАП) */}
         {flagship && (

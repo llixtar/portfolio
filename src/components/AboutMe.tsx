@@ -31,7 +31,7 @@ export default function AboutMe() {
 
   return (
     <section id="about" className="relative py-24 sm:py-32 px-4 bg-transparent overflow-hidden">
-      <div className="relative z-10 max-w-6xl mx-auto space-y-12 sm:space-y-16">
+      <div id="about-content" className="relative z-10 max-w-6xl mx-auto space-y-12 sm:space-y-16">
         
         {/* ЗАГОЛОВОК СЕКЦІЇ */}
         <div className="flex flex-col items-center text-center space-y-4">

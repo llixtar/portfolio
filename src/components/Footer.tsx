@@ -6,7 +6,11 @@ import { Send } from "lucide-react";
 export default function Footer() {
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 24;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   return (
@@ -31,14 +35,14 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs sm:text-sm font-mono">
             <a
               href="#projects"
-              onClick={(e) => scrollToSection(e, "projects")}
+              onClick={(e) => scrollToSection(e, "projects-content")}
               className="text-neutral-400 hover:text-white transition-colors"
             >
               Проєкти
             </a>
             <a
               href="#about"
-              onClick={(e) => scrollToSection(e, "about")}
+              onClick={(e) => scrollToSection(e, "about-content")}
               className="text-neutral-400 hover:text-white transition-colors"
             >
               Про мене
