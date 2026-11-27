@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bevel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9ca3af" />
+      <stop offset="50%" stop-color="#4b5563" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="obsidian" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e232e" />
+      <stop offset="55%" stop-color="#11141c" />
+      <stop offset="100%" stop-color="#07090d" />
+    </linearGradient>
+  </defs>
+
+  <!-- Зовнішня металева фаска зі зрізаними кутами -->
+  <polygon points="10,0 54,0 64,10 64,54 54,64 10,64 0,54 0,10" fill="url(#bevel)" />
+
+  <!-- Внутрішній обсидіановий корпус -->
+  <polygon points="11,2 53,2 62,11 62,53 53,62 11,62 2,53 2,11" fill="url(#obsidian)" />
+
+  <!-- Мінімалістична монограма "A" (архітектурний шеврон + смарагдове ядро) -->
+  <path
+    d="M32 15 L17 48 H24.5 L32 30.5 L39.5 48 H47 L32 15 Z"
+    fill="#ffffff"
+  />
+  <circle cx="32" cy="43" r="4.2" fill="#34d399" />
+</svg>

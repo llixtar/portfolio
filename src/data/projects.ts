@@ -60,10 +60,10 @@ export const projectsData: Project[] = [
     ],
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Interactive UI", "Custom Configurator"],
     demoUrl: "https://www.lepoxy-atelier.com/",
-    desktopImage: "/projects/lepoxy-full.png",
-    mobileImage: "/projects/lepoxy-mobile-full.png",
+    desktopImage: "/projects/lepoxy-full.webp",
+    mobileImage: "/projects/lepoxy-mobile-full.webp",
     screens: [
-      { label: "Повна сторінка (Скрол)", image: "/projects/lepoxy-full.png" },
+      { label: "Повна сторінка (Скрол)", image: "/projects/lepoxy-full.webp" },
     ],
   },
   {
@@ -82,10 +82,10 @@ export const projectsData: Project[] = [
     ],
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Admin Panel", "EdTech"],
     demoUrl: "https://www.genius-land.com.ua/",
-    desktopImage: "/projects/www.genius-land.com.ua_.png",
-    mobileImage: "/projects/www.genius-land.com.ua_(iPhone 16 Pro Max).png",
+    desktopImage: "/projects/genius-land-full.webp",
+    mobileImage: "/projects/genius-land-mobile-full.webp",
     screens: [
-      { label: "Повна сторінка (Скрол)", image: "/projects/www.genius-land.com.ua_.png" },
+      { label: "Повна сторінка (Скрол)", image: "/projects/genius-land-full.webp" },
     ],
   },
   {

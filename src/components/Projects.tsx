@@ -259,6 +259,8 @@ function InteractiveSwapShowcase({
                   <img
                     src={mobileImage}
                     alt={`${project.title} - Mobile`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-auto block select-none pointer-events-none"
                     onError={() => setMobileError(true)}
                   />
@@ -267,6 +269,8 @@ function InteractiveSwapShowcase({
                       src={mobileImage}
                       alt=""
                       aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-auto block select-none pointer-events-none"
                     />
                   )}
@@ -383,6 +387,8 @@ function InteractiveSwapShowcase({
                     <img
                       src={desktopImage}
                       alt={project.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-auto block select-none pointer-events-none"
                       onError={() => setDesktopError(true)}
                     />
@@ -391,6 +397,8 @@ function InteractiveSwapShowcase({
                         src={desktopImage}
                         alt=""
                         aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-auto block select-none pointer-events-none"
                       />
                     )}
@@ -488,6 +496,8 @@ function InteractiveSwapShowcase({
                       <img
                         src={desktopImage}
                         alt={project.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-auto block select-none pointer-events-none"
                         onError={() => setDesktopError(true)}
                       />
@@ -496,6 +506,8 @@ function InteractiveSwapShowcase({
                           src={desktopImage}
                           alt=""
                           aria-hidden="true"
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-auto block select-none pointer-events-none"
                         />
                       )}
@@ -578,6 +590,8 @@ function InteractiveSwapShowcase({
                     <img
                       src={mobileImage}
                       alt={`${project.title} - Mobile`}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-auto block select-none pointer-events-none"
                       onError={() => setMobileError(true)}
                     />
@@ -586,6 +600,8 @@ function InteractiveSwapShowcase({
                         src={mobileImage}
                         alt=""
                         aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-auto block select-none pointer-events-none"
                       />
                     )}

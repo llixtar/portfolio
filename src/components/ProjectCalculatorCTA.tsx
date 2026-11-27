@@ -152,9 +152,14 @@ export default function ProjectCalculatorCTA() {
             
             {/* КРОК 1: ФОРМАТ ПРОЄКТУ */}
             <div className="space-y-3.5">
-              <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-                <span>01 // Формат сайту</span>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-neutral-200 font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+                  <span>Крок 1. Оберіть формат сайту</span>
+                </div>
+                <span className="text-[11px] font-mono text-neutral-400">
+                  натисніть на один із варіантів
+                </span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
@@ -165,16 +170,16 @@ export default function ProjectCalculatorCTA() {
                       key={type.id}
                       type="button"
                       onClick={() => setSelectedTypeId(type.id)}
-                      className={`text-left p-[1px] pb-[2.5px] transition-all cursor-pointer select-none [clip-path:polygon(10px_0,calc(100%-10px)_0,100%_10px,100%_calc(100%-10px),calc(100%-10px)_100%,10px_100%,0_calc(100%-10px),0_10px)] ${
+                      className={`text-left p-[1px] pb-[2.5px] transition-all cursor-pointer select-none active:translate-y-[1px] [clip-path:polygon(10px_0,calc(100%-10px)_0,100%_10px,100%_calc(100%-10px),calc(100%-10px)_100%,10px_100%,0_calc(100%-10px),0_10px)] ${
                         isActive
-                          ? "bg-gradient-to-b from-emerald-400/70 via-neutral-500 to-neutral-900 shadow-[0_10px_24px_rgba(0,0,0,0.85)]"
-                          : "bg-gradient-to-b from-neutral-600/60 via-neutral-800 to-neutral-950 hover:from-neutral-500/80"
+                          ? "bg-gradient-to-b from-emerald-400 via-emerald-600/60 to-neutral-900 shadow-[0_12px_28px_rgba(0,0,0,0.9),0_0_20px_rgba(52,211,153,0.12)] opacity-100"
+                          : "bg-gradient-to-b from-neutral-600/60 via-neutral-800 to-neutral-950 hover:from-neutral-400/80 opacity-75 hover:opacity-100"
                       }`}
                     >
                       <div
                         className={`h-full p-4 [clip-path:polygon(9px_0,calc(100%-9px)_0,100%_9px,100%_calc(100%-9px),calc(100%-9px)_100%,9px_100%,0_calc(100%-9px),0_9px)] flex flex-col justify-between space-y-2.5 transition-colors ${
                           isActive
-                            ? "bg-gradient-to-b from-[#222836] via-[#161a24] to-[#0d1016] shadow-[inset_0_1px_0_rgba(255,255,255,0.22)]"
+                            ? "bg-gradient-to-b from-[#1e292b] via-[#141b22] to-[#0b0f14] shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]"
                             : "bg-gradient-to-b from-[#151821] via-[#101218] to-[#090a0e]"
                         }`}
                       >
@@ -182,20 +187,29 @@ export default function ProjectCalculatorCTA() {
                           <span className="font-heading text-base font-bold text-white tracking-tight">
                             {type.label}
                           </span>
+                          {/* Явний радіо-індикатор вибору */}
                           <span
-                            className={`w-2 h-2 rounded-full shrink-0 transition-all ${
+                            className={`w-4.5 h-4.5 rounded-full shrink-0 border-2 flex items-center justify-center transition-all ${
                               isActive
-                                ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]"
-                                : "bg-neutral-700"
+                                ? "border-emerald-400 bg-emerald-500/15 shadow-[0_0_10px_rgba(52,211,153,0.45)]"
+                                : "border-neutral-600 bg-black/40"
                             }`}
-                          />
+                          >
+                            <span
+                              className={`w-2 h-2 rounded-full transition-transform ${
+                                isActive ? "bg-emerald-400 scale-100" : "scale-0"
+                              }`}
+                            />
+                          </span>
                         </div>
-                        <p className="text-xs text-neutral-400 font-light leading-relaxed">
+                        <p className="text-xs text-neutral-300 font-light leading-relaxed">
                           {type.desc}
                         </p>
-                        <div className="pt-1 flex items-center justify-between text-[11px] font-mono text-neutral-300 border-t border-white/5">
+                        <div className="pt-1.5 flex items-center justify-between text-[11px] font-mono text-neutral-300 border-t border-white/10">
                           <span>{type.minDays}–{type.maxDays} днів</span>
-                          <span className="text-white font-semibold">від ${type.basePrice}</span>
+                          <span className={isActive ? "text-emerald-400 font-semibold" : "text-white font-semibold"}>
+                            від ${type.basePrice}
+                          </span>
                         </div>
                       </div>
                     </button>
@@ -206,9 +220,14 @@ export default function ProjectCalculatorCTA() {
 
             {/* КРОК 2: ДОДАТКОВІ МОДУЛІ */}
             <div className="space-y-3.5">
-              <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400" />
-                <span>02 // Додатковий функціонал</span>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-neutral-200 font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-400" />
+                  <span>Крок 2. Оберіть додаткові модулі</span>
+                </div>
+                <span className="text-[11px] font-mono text-neutral-400">
+                  можна обрати кілька
+                </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -222,10 +241,10 @@ export default function ProjectCalculatorCTA() {
                     <div
                       key={addon.id}
                       onClick={() => toggleAddon(addon.id)}
-                      className={`text-left p-[1px] pb-[2px] transition-all cursor-pointer select-none [clip-path:polygon(8px_0,calc(100%-8px)_0,100%_8px,100%_calc(100%-8px),calc(100%-8px)_100%,8px_100%,0_calc(100%-8px),0_8px)] ${
+                      className={`text-left p-[1px] pb-[2px] transition-all cursor-pointer select-none active:translate-y-[1px] [clip-path:polygon(8px_0,calc(100%-8px)_0,100%_8px,100%_calc(100%-8px),calc(100%-8px)_100%,8px_100%,0_calc(100%-8px),0_8px)] ${
                         isChecked
-                          ? "bg-gradient-to-b from-emerald-400/60 via-neutral-600 to-neutral-900"
-                          : "bg-gradient-to-b from-neutral-700/60 via-neutral-800 to-neutral-950 hover:from-neutral-500/70"
+                          ? "bg-gradient-to-b from-emerald-400/80 via-neutral-500 to-neutral-900 opacity-100"
+                          : "bg-gradient-to-b from-neutral-700/60 via-neutral-800 to-neutral-950 hover:from-neutral-500/80 opacity-75 hover:opacity-100"
                       }`}
                     >
                       <div

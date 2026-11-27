@@ -210,7 +210,7 @@ export default function Hero() {
                   <div className="relative w-full h-full rounded-full overflow-hidden bg-neutral-950 shadow-[inset_0_0_14px_rgba(0,0,0,0.85)]">
                     <Image
                       src="/avatar-profile.jpg"
-                      alt="Розробник"
+                      alt="Андрій Щелаков (Andrii Shchelakov) — Fullstack веб-розробник"
                       fill
                       className="object-cover object-center pointer-events-none select-none grayscale contrast-[1.08] brightness-[0.98]"
                       priority
