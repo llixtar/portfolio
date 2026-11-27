@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     description:
       "Швидкі сайти, інтернет-магазини та бізнес-платформи без шаблонів. Оплата після затвердження демо.",
     url: siteUrl,
-    siteName: "Andrii Shchelakov Portfolio",
+    siteName: "Andrii Shchelakov",
     type: "website",
     locale: "uk_UA",
   },
