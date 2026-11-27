@@ -24,14 +24,14 @@ export default function DigitalRain() {
     let animationFrameId: number;
     let width = window.innerWidth;
     let height = window.innerHeight;
-    let lastWidth = window.innerWidth;
+    let lastWidth = 0;
 
     // Підтримка високої чіткості Retina/OLED для мобільних (DPI)
-    const resizeCanvas = () => {
+    const resizeCanvas = (force = false) => {
       if (!canvas) return;
       // Ігноруємо коливання висоти через тулбари мобільних браузерів при скролі,
-      // перераховуємо тільки якщо реально змінилася ширина (поворот екрана / десктопний ресайз)
-      if (canvas.width > 0 && Math.abs(window.innerWidth - lastWidth) < 12) {
+      // перераховуємо тільки якщо реально змінилася ширина або це перший запуск
+      if (!force && Math.abs(window.innerWidth - lastWidth) < 12) {
         return;
       }
       lastWidth = window.innerWidth;
@@ -45,8 +45,9 @@ export default function DigitalRain() {
       ctx.scale(dpr, dpr);
     };
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas(true);
+    const handleResize = () => resizeCanvas(false);
+    window.addEventListener("resize", handleResize);
 
     // Суто цифри (0-9) без довгих рядків, щоб вони падали рівно й однаково
     const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -96,7 +97,7 @@ export default function DigitalRain() {
     animationFrameId = requestAnimationFrame(render);
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
